@@ -3,11 +3,14 @@
   "WorkspaceRootPath": "D:\\Course Project\\RIA-2025\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Course Project\\StaticLibrary\\StaticLibrary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{95F31E07-B489-4E7A-AFA2-C67AEC73D0E9}|..\\Assembler\\Assembler.vcxproj|D:\\Course Project\\Assembler\\out.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project\\RIA-2025\\in.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:in.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project\\RIA-2025\\RIA-2025.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:RIA-2025.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D178AAA3-1628-4FDD-9BFA-04396D4EEC1D}|..\\StaticLibrary\\StaticLibrary.vcxproj|D:\\Course Project\\StaticLibrary\\StaticLibrary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,24 +20,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "in.txt",
-              "DocumentMoniker": "D:\\Course Project\\RIA-2025\\in.txt",
-              "RelativeDocumentMoniker": "in.txt",
-              "ToolTip": "D:\\Course Project\\RIA-2025\\in.txt",
-              "RelativeToolTip": "in.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-11-25T21:33:17.413Z",
+              "DocumentIndex": 0,
+              "Title": "out.asm",
+              "DocumentMoniker": "D:\\Course Project\\Assembler\\out.asm",
+              "RelativeDocumentMoniker": "..\\Assembler\\out.asm",
+              "ToolTip": "D:\\Course Project\\Assembler\\out.asm",
+              "RelativeToolTip": "..\\Assembler\\out.asm",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-26T10:14:30.88Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "RIA-2025.cpp",
+              "DocumentMoniker": "D:\\Course Project\\RIA-2025\\RIA-2025.cpp",
+              "RelativeDocumentMoniker": "RIA-2025.cpp",
+              "ToolTip": "D:\\Course Project\\RIA-2025\\RIA-2025.cpp",
+              "RelativeToolTip": "RIA-2025.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-26T09:59:03.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "StaticLibrary.cpp",
               "DocumentMoniker": "D:\\Course Project\\StaticLibrary\\StaticLibrary.cpp",
               "RelativeDocumentMoniker": "..\\StaticLibrary\\StaticLibrary.cpp",

@@ -1,17 +1,2 @@
-﻿  Error.cpp
-  FST.cpp
-  Generator.cpp
-  GRB.cpp
-  In.cpp
-  IT.cpp
-  LexAnalysis.cpp
-D:\Course Project\RIA-2025\LexAnalysis.cpp(81,41): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
-  Log.cpp
-  LT.cpp
-  MFST.cpp
-  Parm.cpp
-  PolishNotation.cpp
-  RIA-2025.cpp
-  SemAnalysis.cpp
-  Создание кода...
+﻿  RIA-2025.cpp
   RIA-2025.vcxproj -> D:\Course Project\RIA-2025\Debug\RIA-2025.exe

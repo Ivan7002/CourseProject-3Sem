@@ -4,7 +4,7 @@
 
 int wmain(int argc, wchar_t* argv[])
 {
-	std::cout << "Penis\n";
+
 	char LEXERROR[] = "Лексический анализ завершен с ошибками";
 	char SYNTERROR[] = "Синтаксический анализ завершен с ошибками";
 	char SEMERROR[] = "Обнаружены семантические ошибки";

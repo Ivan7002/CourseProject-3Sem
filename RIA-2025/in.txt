@@ -70,7 +70,7 @@ main {
 declare unsigned a;
 declare unsigned b;
 a = 10;
-b = 20;
+b = 5;
 declare unsigned usum;
 usum = a + b;
 cout usum; cout "\n";   
@@ -78,17 +78,6 @@ cout usum; cout "\n";
 declare unsigned bit_or;
 bit_or = a | b;
 cout bit_or; cout "\n";
-
-
-    declare integer iter;
-    iter = 0;
-    do{
-        iter = iter + 1;
-        cout "Penis - ";
-        cout iter; cout "\n";
-    }while(iter != 5);
-
-
 
     cout "End of Demo\n";
 }

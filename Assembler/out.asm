@@ -5,7 +5,7 @@ includelib msvcrtd.lib
 includelib vcruntimed.lib
 includelib ucrtd.lib
 includelib kernel32.lib
-includelib "../Debug/StaticLibrary.lib"
+includelib "..\RIA-2025\Debug\StaticLibrary.lib"
 ExitProcess PROTO:DWORD 
 .stack 4096
 
@@ -67,13 +67,10 @@ ExitProcess PROTO:DWORD
 		var_LTRL41 byte 'Iter: ', 0
 		var_LTRL42 byte 10, 0
 		var_LTRL43 sdword 1
-		var_LTRL44 sdword 20
+		var_LTRL44 sdword 5
 		var_LTRL45 byte 10, 0
 		var_LTRL46 byte 10, 0
-		var_LTRL47 byte 'Penis - ', 0
-		var_LTRL48 byte 10, 0
-		var_LTRL49 sdword 5
-		var_LTRL50 byte 'End of Demo', 10, 0
+		var_LTRL47 byte 'End of Demo', 10, 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -90,7 +87,6 @@ ExitProcess PROTO:DWORD
 		var_b byte 0
 		var_usum byte 0
 		var_bit_or byte 0
-		var_iter dword 0
 .code
 
 ;----------- sum ------------
@@ -452,43 +448,7 @@ call outlich
 push offset var_LTRL46
 call outrad
 
-push var_LTRL2
-pop eax
-mov var_iter, eax
-
-lbl_do_5:
-
-push var_iter
-push var_LTRL43
-pop ebx
-pop eax
-add eax, ebx
-push eax
-pop eax
-mov var_iter, eax
-
 push offset var_LTRL47
-call outrad
-
-push var_iter
-call outlich
-
-push offset var_LTRL48
-call outrad
-
-push var_iter
-push var_LTRL49
-pop ebx
-pop eax
-cmp eax, ebx
-setne al
-movzx eax, al
-push eax
-pop eax
-cmp eax, 0
-jne lbl_do_5
-
-push offset var_LTRL50
 call outrad
 
 push 0
