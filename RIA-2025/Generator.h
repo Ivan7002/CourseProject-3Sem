@@ -15,7 +15,7 @@
 "includelib vcruntimed.lib\n"\
 "includelib ucrtd.lib\n"\
 "includelib kernel32.lib\n"\
-"includelib \"../Debug/StaticLibrary.lib\"\n"\
+"includelib \"..\\RIA-2025\\Debug\\StaticLibrary.lib\"\n"\
 "ExitProcess PROTO:DWORD \n"\
 ".stack 4096\n"
 
