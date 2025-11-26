@@ -67,7 +67,7 @@ ExitProcess PROTO:DWORD
 		var_LTRL41 byte 'Iter: ', 0
 		var_LTRL42 byte 10, 0
 		var_LTRL43 sdword 1
-		var_LTRL44 sdword 5
+		var_LTRL44 sdword 40
 		var_LTRL45 byte 10, 0
 		var_LTRL46 byte 10, 0
 		var_LTRL47 byte 'End of Demo', 10, 0
@@ -83,6 +83,7 @@ ExitProcess PROTO:DWORD
 		var_not_vbn byte 0
 		var_vbn byte 0
 		var_text dword 0
+		var_e byte 0
 		var_a byte 0
 		var_b byte 0
 		var_usum byte 0
@@ -403,6 +404,19 @@ push eax
 pop eax
 cmp eax, 0
 jne lbl_do_4
+
+push var_LTRL2
+pop eax
+mov byte ptr [var_e], al
+
+push var_LTRL1
+movzx eax, byte ptr [var_e]
+push eax
+pop ebx
+pop eax
+add eax, ebx
+push eax
+call outlich
 
 push var_LTRL4
 pop eax

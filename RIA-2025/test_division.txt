@@ -1,0 +1,11 @@
+main {
+    declare integer x;
+    declare integer e;
+
+    x = 10;
+    e = 0;          // e становится константой со значением 0
+
+    cout "Direct division by zero: "; cout 5 / 0; cout "\n";  // Должно пойматься
+    cout "Division by zero variable: "; cout 5 / e; cout "\n"; // Должно пойматься
+    cout "Normal division: "; cout 10 / 2; cout "\n";          // OK
+}

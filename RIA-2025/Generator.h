@@ -7,7 +7,6 @@
 #define SEPSTREMP "\n;------------------------------\n"
 #define SEPSTR(x) "\n;----------- " + string(x) + " ------------\n"
 
-// Обновленный список библиотек для поддержки современного C++ рантайма
 #define BEGIN ".586\n"\
 ".model flat, stdcall\n"\
 "includelib legacy_stdio_definitions.lib\n"\

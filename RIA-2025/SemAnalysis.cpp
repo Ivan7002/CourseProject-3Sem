@@ -4,12 +4,75 @@
 #include "LexAnalysis.h"
 #include "SemAnalysis.h"
 #include <set>
+#include <cstring>
 
 namespace Semantic
 {
+	void initConstantTracker(ConstantTracker& tracker)
+	{
+		tracker.count = 0;
+		for (int i = 0; i < MAX_CONSTANT_TRACKING; i++)
+		{
+			tracker.constants[i].isConstant = false;
+			tracker.constants[i].variableId[0] = '\0';
+			tracker.constants[i].value = 0;
+		}
+	}
+
+	int getConstantValue(ConstantTracker& tracker, const char* varId)
+	{
+		for (int i = 0; i < tracker.count; i++)
+		{
+			if (tracker.constants[i].isConstant &&
+				strcmp(tracker.constants[i].variableId, varId) == 0)
+			{
+				return tracker.constants[i].value;
+			}
+		}
+		return INT_MAX; // Специальное значение, означающее "не константа"
+	}
+
+	void setConstantValue(ConstantTracker& tracker, const char* varId, int value)
+	{
+		// Сначала проверим, есть ли уже такая переменная
+		for (int i = 0; i < tracker.count; i++)
+		{
+			if (strcmp(tracker.constants[i].variableId, varId) == 0)
+			{
+				tracker.constants[i].value = value;
+				tracker.constants[i].isConstant = true;
+				return;
+			}
+		}
+
+		// Если не нашли, добавляем новую
+		if (tracker.count < MAX_CONSTANT_TRACKING)
+		{
+			strncpy_s(tracker.constants[tracker.count].variableId, SCOPED_ID_MAXSIZE, varId, SCOPED_ID_MAXSIZE - 1);
+			tracker.constants[tracker.count].variableId[SCOPED_ID_MAXSIZE - 1] = '\0';
+			tracker.constants[tracker.count].value = value;
+			tracker.constants[tracker.count].isConstant = true;
+			tracker.count++;
+		}
+	}
+
+	void removeConstantValue(ConstantTracker& tracker, const char* varId)
+	{
+		for (int i = 0; i < tracker.count; i++)
+		{
+			if (strcmp(tracker.constants[i].variableId, varId) == 0)
+			{
+				tracker.constants[i].isConstant = false;
+				return;
+			}
+		}
+	}
+
 	bool Semantic::semanticsCheck(Lexer::LEX& tables, Log::LOG& log)
 	{
 		bool sem_ok = true;
+		ConstantTracker constTracker;
+		initConstantTracker(constTracker);
 
 		for (int i = 0; i < tables.lextable.size; i++)
 		{
@@ -27,27 +90,45 @@ namespace Semantic
 			case LEX_PERSENT:
 			{
 				// Division by zero check
-				// Check if next is literal 0
-				if (i + 1 < tables.lextable.size && tables.lextable.table[i + 1].lexema == LEX_LITERAL)
+				if (i + 1 < tables.lextable.size)
 				{
-					if (tables.idtable.table[tables.lextable.table[i + 1].idxTI].value.vint == 0)
+					// Check if next is literal 0
+					if (tables.lextable.table[i + 1].lexema == LEX_LITERAL)
 					{
-						sem_ok = false;
-						Log::writeError(log.stream, Error::GetError(318, tables.lextable.table[i].sn, 0));
+						IT::Entry& literalEntry = tables.idtable.table[tables.lextable.table[i + 1].idxTI];
+						if (literalEntry.value.vint == 0)
+						{
+							sem_ok = false;
+							Log::writeError(log.stream, Error::GetError(318, tables.lextable.table[i].sn, 0));
+						}
+					}
+					// Check if next is a variable that is known to be 0
+					else if (tables.lextable.table[i + 1].lexema == LEX_ID)
+					{
+						char* varName = tables.idtable.table[tables.lextable.table[i + 1].idxTI].id;
+						int constVal = getConstantValue(constTracker, varName);
+						if (constVal == 0) // Variable is known to be 0
+						{
+							sem_ok = false;
+							Log::writeError(log.stream, Error::GetError(318, tables.lextable.table[i].sn, 0));
+						}
 					}
 				}
 				break;
 			}
 			case LEX_EQUAL: // Assignment
 			{
-				if (i > 0 && tables.lextable.table[i - 1].idxTI != NULLIDX_TI) 
+				if (i > 0 && tables.lextable.table[i - 1].idxTI != NULLIDX_TI)
 				{
 					IT::IDDATATYPE lefttype = tables.idtable.table[tables.lextable.table[i - 1].idxTI].iddatatype;
+					char* leftVarName = tables.idtable.table[tables.lextable.table[i - 1].idxTI].id;
 					bool ignore = false;
+					bool isConstantAssignment = true; // Предполагаем, что присваивание константы
+					int constantValue = 0;
 
 					for (int k = i + 1; k < tables.lextable.size && tables.lextable.table[k].lexema != LEX_SEPARATOR; k++)
 					{
-						if (tables.lextable.table[k].idxTI != NULLIDX_TI) 
+						if (tables.lextable.table[k].idxTI != NULLIDX_TI)
 						{
 							if (!ignore)
 							{
@@ -59,11 +140,35 @@ namespace Semantic
 									sem_ok = false;
 									break;
 								}
+
+								// Проверяем, является ли правая часть константой
+								if (tables.lextable.table[k].lexema == LEX_LITERAL)
+								{
+									constantValue = tables.idtable.table[tables.lextable.table[k].idxTI].value.vint;
+								}
+								else if (tables.lextable.table[k].lexema == LEX_ID)
+								{
+									// Проверяем, является ли переменная константой
+									int constVal = getConstantValue(constTracker, tables.idtable.table[tables.lextable.table[k].idxTI].id);
+									if (constVal != INT_MAX)
+									{
+										constantValue = constVal;
+									}
+									else
+									{
+										isConstantAssignment = false;
+									}
+								}
+								else
+								{
+									isConstantAssignment = false;
+								}
 							}
-							
+
 							if (k + 1 < tables.lextable.size && tables.lextable.table[k + 1].lexema == LEX_LEFTHESIS)
 							{
 								ignore = true;
+								isConstantAssignment = false; // Вызов функции - не константа
 								continue;
 							}
 							if (ignore && tables.lextable.table[k + 1].lexema == LEX_RIGHTTHESIS)
@@ -72,16 +177,37 @@ namespace Semantic
 								continue;
 							}
 						}
-						if (lefttype == IT::IDDATATYPE::STR) 
+						else
+						{
+							// Если есть операторы, то это не простое присваивание константы
+							char l = tables.lextable.table[k].lexema;
+							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR || l == LEX_DIRSLASH || l == LEX_PERSENT)
+							{
+								isConstantAssignment = false;
+							}
+						}
+
+						if (lefttype == IT::IDDATATYPE::STR)
 						{
 							char l = tables.lextable.table[k].lexema;
-							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR || l == LEX_DIRSLASH || l == LEX_BITOR || l == LEX_BITAND || l == LEX_BITNOT) 
+							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR || l == LEX_DIRSLASH || l == LEX_BITOR || l == LEX_BITAND || l == LEX_BITNOT)
 							{
 								Log::writeError(log.stream, Error::GetError(316, tables.lextable.table[k].sn, 0));
 								sem_ok = false;
 								break;
 							}
 						}
+					}
+
+					// Если присваивание константы, запоминаем её
+					if (isConstantAssignment && leftVarName[0] != '\0')
+					{
+						setConstantValue(constTracker, leftVarName, constantValue);
+					}
+					else if (leftVarName[0] != '\0')
+					{
+						// Если присваивание не константы, удаляем из трекера
+						removeConstantValue(constTracker, leftVarName);
 					}
 				}
 				break;

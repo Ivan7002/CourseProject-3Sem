@@ -65,12 +65,14 @@ main {
         x = x + 1;
     } while (x < 3);
 
-
+declare unsigned e;
+e = 0;
+cout 2 + e;
 
 declare unsigned a;
 declare unsigned b;
 a = 10;
-b = 5;
+b = 40;
 declare unsigned usum;
 usum = a + b;
 cout usum; cout "\n";   
@@ -79,5 +81,7 @@ declare unsigned bit_or;
 bit_or = a | b;
 cout bit_or; cout "\n";
 
+   
+ 
     cout "End of Demo\n";
 }

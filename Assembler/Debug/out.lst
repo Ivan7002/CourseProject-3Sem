@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 16:38:23
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 20:11:51
 out.asm							     Page 1 - 1
 
 
@@ -122,7 +122,7 @@ out.asm							     Page 1 - 1
 	   20 00
  0000017A 0A 00					var_LTRL42 byte 10, 0
  0000017C 00000001				var_LTRL43 sdword 1
- 00000180 00000005				var_LTRL44 sdword 5
+ 00000180 00000028				var_LTRL44 sdword 40
  00000184 0A 00					var_LTRL45 byte 10, 0
  00000186 0A 00					var_LTRL46 byte 10, 0
  00000188 45 6E 64 20 6F			var_LTRL47 byte 'End of Demo', 10, 0
@@ -522,7 +522,7 @@ out.asm							     Page 1 - 1
  000003C5  E8 00000000 E	call ExitProcess
  000003CA			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 16:38:23
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 20:11:51
 out.asm							     Symbols 2 - 1
 
 

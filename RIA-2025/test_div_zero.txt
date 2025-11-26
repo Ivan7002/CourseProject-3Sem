@@ -1,0 +1,7 @@
+main {
+    declare integer x;
+    declare integer y;
+    x = 10 / 0;  // Direct division by zero literal
+    y = 5 % 0;   // Modulo by zero
+    cout x;
+}
