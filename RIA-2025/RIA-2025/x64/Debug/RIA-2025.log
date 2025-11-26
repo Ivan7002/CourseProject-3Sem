@@ -1,0 +1,20 @@
+﻿  Error.cpp
+  FST.cpp
+  Generator.cpp
+D:\Course Project\RIA-2025\Generator.cpp(194,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  GRB.cpp
+  In.cpp
+  IT.cpp
+  LexAnalysis.cpp
+D:\Course Project\RIA-2025\LexAnalysis.cpp(81,41): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
+  Log.cpp
+D:\Course Project\RIA-2025\Log.cpp(51,12): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+  LT.cpp
+  MFST.cpp
+  Parm.cpp
+  PolishNotation.cpp
+D:\Course Project\RIA-2025\PolishNotation.cpp(93,34): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  RIA-2025.cpp
+  SemAnalysis.cpp
+  Создание кода...
+  RIA-2025.vcxproj -> D:\Course Project\RIA-2025\x64\Debug\RIA-2025.exe
