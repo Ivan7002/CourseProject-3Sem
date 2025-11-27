@@ -149,6 +149,8 @@ namespace Gener
 				str += "pop ebx\npop eax\nand eax, ebx\npush eax\n"; break;
 			case LEX_BITNOT:
 				str += "pop eax\nnot eax\npush eax\n"; break;
+			case LEX_NOT:
+				str += "pop eax\ncmp eax, 0\nsete al\nmovzx eax, al\npush eax\n"; break;
             case LEX_MORE:
                 str += "pop ebx\npop eax\ncmp eax, ebx\nsetg al\nmovzx eax, al\npush eax\n"; break;
             case LEX_LESS:

@@ -1,0 +1,9 @@
+*.exe
+*.obj
+*.o
+*.log
+*.tmp
+/.vs
+/build
+/bin
+

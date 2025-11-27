@@ -35,13 +35,14 @@ main {
     cout "Bitwise NOT (~vbn): "; cout not_vbn; cout "\n";
 
     cout "Logic & If:\n";
-    flag = true;
-    if (flag) {
+    flag = false;
+    if (!(flag)) {
         cout "Flag is true.\n";
     }
     if (x != y) {
         cout "x is not equal to y\n";
     }
+    
 
     cout "Function & Bool:\n";
     cout "Check if 4 is even: ";
@@ -63,22 +64,22 @@ main {
     do {
         cout "Iter: "; cout x; cout "\n";
         x = x + 1;
-    } while (x < 3);
+    } while (x != 3);
 
 declare unsigned e;
 e = 0;
-cout 2 + e;
+cout 2 + e; cout "\n";
 
-declare unsigned a;
+declare unsigned o;
 declare unsigned b;
-a = 10;
+o = 10;
 b = 40;
-declare unsigned usum;
-usum = a + b;
-cout usum; cout "\n";   
+declare unsigned u;
+u = o + b;
+cout u; cout "\n";   
 
 declare unsigned bit_or;
-bit_or = a | b;
+bit_or = o | b;
 cout bit_or; cout "\n";
 
    

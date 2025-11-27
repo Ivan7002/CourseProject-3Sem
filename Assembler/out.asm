@@ -47,7 +47,7 @@ ExitProcess PROTO:DWORD
 		var_LTRL21 byte 'Bitwise NOT (~vbn): ', 0
 		var_LTRL22 byte 10, 0
 		var_LTRL23 byte 'Logic & If:', 10, 0
-		var_LTRL24 sdword 1
+		var_LTRL24 sdword 0
 		var_LTRL25 byte 'Flag is true.', 10, 0
 		var_LTRL26 byte 'x is not equal to y', 10, 0
 		var_LTRL27 byte 'Function & Bool:', 10, 0
@@ -67,10 +67,11 @@ ExitProcess PROTO:DWORD
 		var_LTRL41 byte 'Iter: ', 0
 		var_LTRL42 byte 10, 0
 		var_LTRL43 sdword 1
-		var_LTRL44 sdword 40
-		var_LTRL45 byte 10, 0
+		var_LTRL44 byte 10, 0
+		var_LTRL45 sdword 40
 		var_LTRL46 byte 10, 0
-		var_LTRL47 byte 'End of Demo', 10, 0
+		var_LTRL47 byte 10, 0
+		var_LTRL48 byte 'End of Demo', 10, 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -84,9 +85,9 @@ ExitProcess PROTO:DWORD
 		var_vbn byte 0
 		var_text dword 0
 		var_e byte 0
-		var_a byte 0
+		var_o byte 0
 		var_b byte 0
-		var_usum byte 0
+		var_u byte 0
 		var_bit_or byte 0
 .code
 
@@ -281,6 +282,11 @@ mov var_flag, eax
 push var_flag
 pop eax
 cmp eax, 0
+sete al
+movzx eax, al
+push eax
+pop eax
+cmp eax, 0
 je lbl_if_end_1
 
 push offset var_LTRL25
@@ -398,7 +404,7 @@ push var_LTRL5
 pop ebx
 pop eax
 cmp eax, ebx
-setl al
+setne al
 movzx eax, al
 push eax
 pop eax
@@ -418,15 +424,18 @@ add eax, ebx
 push eax
 call outlich
 
+push offset var_LTRL44
+call outrad
+
 push var_LTRL4
 pop eax
-mov byte ptr [var_a], al
+mov byte ptr [var_o], al
 
-push var_LTRL44
+push var_LTRL45
 pop eax
 mov byte ptr [var_b], al
 
-movzx eax, byte ptr [var_a]
+movzx eax, byte ptr [var_o]
 push eax
 movzx eax, byte ptr [var_b]
 push eax
@@ -435,16 +444,16 @@ pop eax
 add eax, ebx
 push eax
 pop eax
-mov byte ptr [var_usum], al
+mov byte ptr [var_u], al
 
-movzx eax, byte ptr [var_usum]
+movzx eax, byte ptr [var_u]
 push eax
 call outlich
 
-push offset var_LTRL45
+push offset var_LTRL46
 call outrad
 
-movzx eax, byte ptr [var_a]
+movzx eax, byte ptr [var_o]
 push eax
 movzx eax, byte ptr [var_b]
 push eax
@@ -459,10 +468,10 @@ movzx eax, byte ptr [var_bit_or]
 push eax
 call outlich
 
-push offset var_LTRL46
+push offset var_LTRL47
 call outrad
 
-push offset var_LTRL47
+push offset var_LTRL48
 call outrad
 
 push 0

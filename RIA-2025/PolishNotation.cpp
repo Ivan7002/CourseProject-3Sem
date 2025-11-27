@@ -17,6 +17,7 @@ namespace Polish
 		case LEX_PLUS: case LEX_MINUS: return 4;
 		case LEX_STAR: case LEX_DIRSLASH: case LEX_PERSENT: return 5;
 		case LEX_BITNOT: return 6;
+		case LEX_NOT: return 7;
 		default: return -1;
 		}
 	}

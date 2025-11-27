@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 20:11:51
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/27/25 11:41:37
 out.asm							     Page 1 - 1
 
 
@@ -73,7 +73,7 @@ out.asm							     Page 1 - 1
  000000A9 4C 6F 67 69 63			var_LTRL23 byte 'Logic & If:', 10, 0
 	   20 26 20 49 66
 	   3A 0A 00
- 000000B6 00000001				var_LTRL24 sdword 1
+ 000000B6 00000000				var_LTRL24 sdword 0
  000000BA 46 6C 61 67 20			var_LTRL25 byte 'Flag is true.', 10, 0
 	   69 73 20 74 72
 	   75 65 2E 0A 00
@@ -122,10 +122,11 @@ out.asm							     Page 1 - 1
 	   20 00
  0000017A 0A 00					var_LTRL42 byte 10, 0
  0000017C 00000001				var_LTRL43 sdword 1
- 00000180 00000028				var_LTRL44 sdword 40
- 00000184 0A 00					var_LTRL45 byte 10, 0
+ 00000180 0A 00					var_LTRL44 byte 10, 0
+ 00000182 00000028				var_LTRL45 sdword 40
  00000186 0A 00					var_LTRL46 byte 10, 0
- 00000188 45 6E 64 20 6F			var_LTRL47 byte 'End of Demo', 10, 0
+ 00000188 0A 00					var_LTRL47 byte 10, 0
+ 0000018A 45 6E 64 20 6F			var_LTRL48 byte 'End of Demo', 10, 0
 	   66 20 44 65 6D
 	   6F 0A 00
  00000000			.data
@@ -142,10 +143,11 @@ out.asm							     Page 1 - 1
  00000119 00					var_not_vbn byte 0
  0000011A 00					var_vbn byte 0
  0000011B 00000000				var_text dword 0
- 0000011F 00					var_a byte 0
- 00000120 00					var_b byte 0
- 00000121 00					var_usum byte 0
- 00000122 00					var_bit_or byte 0
+ 0000011F 00					var_e byte 0
+ 00000120 00					var_o byte 0
+ 00000121 00					var_b byte 0
+ 00000122 00					var_u byte 0
+ 00000123 00					var_bit_or byte 0
  00000000			.code
 
 				;----------- sum ------------
@@ -341,188 +343,210 @@ out.asm							     Page 1 - 1
  000001DF  FF 35 00000115 R	push var_flag
  000001E5  58			pop eax
  000001E6  83 F8 00		cmp eax, 0
- 000001E9  74 0A		je lbl_if_end_1
+ 000001E9  0F 94 C0		sete al
+ 000001EC  0F B6 C0		movzx eax, al
+ 000001EF  50			push eax
+ 000001F0  58			pop eax
+ 000001F1  83 F8 00		cmp eax, 0
+ 000001F4  74 0A		je lbl_if_end_1
 
- 000001EB  68 000000BA R	push offset var_LTRL25
- 000001F0  E8 00000000 E	call outrad
+ 000001F6  68 000000BA R	push offset var_LTRL25
+ 000001FB  E8 00000000 E	call outrad
 
- 000001F5			lbl_if_end_1:
+ 00000200			lbl_if_end_1:
 
- 000001F5  FF 35 00000108 R	push var_x
- 000001FB  FF 35 0000010C R	push var_y
- 00000201  5B			pop ebx
- 00000202  58			pop eax
- 00000203  3B C3		cmp eax, ebx
- 00000205  0F 95 C0		setne al
- 00000208  0F B6 C0		movzx eax, al
- 0000020B  50			push eax
- 0000020C  58			pop eax
- 0000020D  83 F8 00		cmp eax, 0
- 00000210  74 0A		je lbl_if_end_2
+ 00000200  FF 35 00000108 R	push var_x
+ 00000206  FF 35 0000010C R	push var_y
+ 0000020C  5B			pop ebx
+ 0000020D  58			pop eax
+ 0000020E  3B C3		cmp eax, ebx
+ 00000210  0F 95 C0		setne al
+ 00000213  0F B6 C0		movzx eax, al
+ 00000216  50			push eax
+ 00000217  58			pop eax
+ 00000218  83 F8 00		cmp eax, 0
+ 0000021B  74 0A		je lbl_if_end_2
 
- 00000212  68 000000C9 R	push offset var_LTRL26
- 00000217  E8 00000000 E	call outrad
+ 0000021D  68 000000C9 R	push offset var_LTRL26
+ 00000222  E8 00000000 E	call outrad
 
- 0000021C			lbl_if_end_2:
+ 00000227			lbl_if_end_2:
 
- 0000021C  68 000000DE R	push offset var_LTRL27
- 00000221  E8 00000000 E	call outrad
+ 00000227  68 000000DE R	push offset var_LTRL27
+ 0000022C  E8 00000000 E	call outrad
 
- 00000226  68 000000F0 R	push offset var_LTRL28
- 0000022B  E8 00000000 E	call outrad
+ 00000231  68 000000F0 R	push offset var_LTRL28
+ 00000236  E8 00000000 E	call outrad
 
 
- 00000230  FF 35 00000105 R	push var_LTRL29
- 00000236  E8 FFFFFDE6		call isEven
- 0000023B  50			push eax
- 0000023C  58			pop eax
- 0000023D  83 F8 00		cmp eax, 0
- 00000240  74 0A		je lbl_if_end_3
+ 0000023B  FF 35 00000105 R	push var_LTRL29
+ 00000241  E8 FFFFFDDB		call isEven
+ 00000246  50			push eax
+ 00000247  58			pop eax
+ 00000248  83 F8 00		cmp eax, 0
+ 0000024B  74 0A		je lbl_if_end_3
 
- 00000242  68 00000109 R	push offset var_LTRL30
- 00000247  E8 00000000 E	call outrad
+ 0000024D  68 00000109 R	push offset var_LTRL30
+ 00000252  E8 00000000 E	call outrad
 
- 0000024C			lbl_if_end_3:
+ 00000257			lbl_if_end_3:
 
- 0000024C  68 0000010E R	push offset var_LTRL31
- 00000251  E8 00000000 E	call outrad
+ 00000257  68 0000010E R	push offset var_LTRL31
+ 0000025C  E8 00000000 E	call outrad
 
- 00000256  68 00000118 R	push offset var_LTRL32
- 0000025B  58			pop eax
- 0000025C  A3 00000111 R	mov var_s, eax
+ 00000261  68 00000118 R	push offset var_LTRL32
+ 00000266  58			pop eax
+ 00000267  A3 00000111 R	mov var_s, eax
 
- 00000261  68 00000124 R	push offset var_LTRL33
- 00000266  E8 00000000 E	call outrad
-
- 0000026B  FF 35 00000111 R	push var_s
+ 0000026C  68 00000124 R	push offset var_LTRL33
  00000271  E8 00000000 E	call outrad
 
- 00000276  68 00000136 R	push offset var_LTRL34
- 0000027B  E8 00000000 E	call outrad
+ 00000276  FF 35 00000111 R	push var_s
+ 0000027C  E8 00000000 E	call outrad
 
- 00000280  68 00000138 R	push offset var_LTRL35
- 00000285  E8 00000000 E	call outrad
+ 00000281  68 00000136 R	push offset var_LTRL34
+ 00000286  E8 00000000 E	call outrad
 
-
- 0000028A  FF 35 00000111 R	push var_s
- 00000290  68 00000004 R	push offset buffer
- 00000295  E8 00000000 E	call strlen
- 0000029A  50			push eax
- 0000029B  E8 00000000 E	call outlich
-
- 000002A0  68 0000014B R	push offset var_LTRL36
- 000002A5  E8 00000000 E	call outrad
-
- 000002AA  68 0000014D R	push offset var_LTRL37
- 000002AF  E8 00000000 E	call outrad
+ 0000028B  68 00000138 R	push offset var_LTRL35
+ 00000290  E8 00000000 E	call outrad
 
 
- 000002B4  FF 35 0000015D R	push var_LTRL38
- 000002BA  68 00000004 R	push offset buffer
- 000002BF  E8 00000000 E	call tostring
- 000002C4  50			push eax
- 000002C5  E8 00000000 E	call outrad
+ 00000295  FF 35 00000111 R	push var_s
+ 0000029B  68 00000004 R	push offset buffer
+ 000002A0  E8 00000000 E	call strlen
+ 000002A5  50			push eax
+ 000002A6  E8 00000000 E	call outlich
 
- 000002CA  68 00000161 R	push offset var_LTRL39
- 000002CF  E8 00000000 E	call outrad
+ 000002AB  68 0000014B R	push offset var_LTRL36
+ 000002B0  E8 00000000 E	call outrad
 
- 000002D4  68 00000163 R	push offset var_LTRL40
- 000002D9  E8 00000000 E	call outrad
+ 000002B5  68 0000014D R	push offset var_LTRL37
+ 000002BA  E8 00000000 E	call outrad
 
- 000002DE  FF 35 00000007 R	push var_LTRL2
- 000002E4  58			pop eax
- 000002E5  A3 00000108 R	mov var_x, eax
 
- 000002EA			lbl_do_4:
+ 000002BF  FF 35 0000015D R	push var_LTRL38
+ 000002C5  68 00000004 R	push offset buffer
+ 000002CA  E8 00000000 E	call tostring
+ 000002CF  50			push eax
+ 000002D0  E8 00000000 E	call outrad
 
- 000002EA  68 00000173 R	push offset var_LTRL41
- 000002EF  E8 00000000 E	call outrad
+ 000002D5  68 00000161 R	push offset var_LTRL39
+ 000002DA  E8 00000000 E	call outrad
 
- 000002F4  FF 35 00000108 R	push var_x
- 000002FA  E8 00000000 E	call outlich
+ 000002DF  68 00000163 R	push offset var_LTRL40
+ 000002E4  E8 00000000 E	call outrad
 
- 000002FF  68 0000017A R	push offset var_LTRL42
- 00000304  E8 00000000 E	call outrad
+ 000002E9  FF 35 00000007 R	push var_LTRL2
+ 000002EF  58			pop eax
+ 000002F0  A3 00000108 R	mov var_x, eax
 
- 00000309  FF 35 00000108 R	push var_x
- 0000030F  FF 35 0000017C R	push var_LTRL43
- 00000315  5B			pop ebx
- 00000316  58			pop eax
- 00000317  03 C3		add eax, ebx
- 00000319  50			push eax
- 0000031A  58			pop eax
- 0000031B  A3 00000108 R	mov var_x, eax
+ 000002F5			lbl_do_4:
 
- 00000320  FF 35 00000108 R	push var_x
- 00000326  FF 35 00000019 R	push var_LTRL5
- 0000032C  5B			pop ebx
- 0000032D  58			pop eax
- 0000032E  3B C3		cmp eax, ebx
- 00000330  0F 9C C0		setl al
- 00000333  0F B6 C0		movzx eax, al
- 00000336  50			push eax
- 00000337  58			pop eax
- 00000338  83 F8 00		cmp eax, 0
- 0000033B  75 AD		jne lbl_do_4
+ 000002F5  68 00000173 R	push offset var_LTRL41
+ 000002FA  E8 00000000 E	call outrad
 
- 0000033D  FF 35 00000015 R	push var_LTRL4
- 00000343  58			pop eax
- 00000344  A2 0000011F R	mov byte ptr [var_a], al
+ 000002FF  FF 35 00000108 R	push var_x
+ 00000305  E8 00000000 E	call outlich
 
- 00000349  FF 35 00000180 R	push var_LTRL44
- 0000034F  58			pop eax
- 00000350  A2 00000120 R	mov byte ptr [var_b], al
+ 0000030A  68 0000017A R	push offset var_LTRL42
+ 0000030F  E8 00000000 E	call outrad
 
- 00000355  0F B6 05		movzx eax, byte ptr [var_a]
+ 00000314  FF 35 00000108 R	push var_x
+ 0000031A  FF 35 0000017C R	push var_LTRL43
+ 00000320  5B			pop ebx
+ 00000321  58			pop eax
+ 00000322  03 C3		add eax, ebx
+ 00000324  50			push eax
+ 00000325  58			pop eax
+ 00000326  A3 00000108 R	mov var_x, eax
+
+ 0000032B  FF 35 00000108 R	push var_x
+ 00000331  FF 35 00000019 R	push var_LTRL5
+ 00000337  5B			pop ebx
+ 00000338  58			pop eax
+ 00000339  3B C3		cmp eax, ebx
+ 0000033B  0F 95 C0		setne al
+ 0000033E  0F B6 C0		movzx eax, al
+ 00000341  50			push eax
+ 00000342  58			pop eax
+ 00000343  83 F8 00		cmp eax, 0
+ 00000346  75 AD		jne lbl_do_4
+
+ 00000348  FF 35 00000007 R	push var_LTRL2
+ 0000034E  58			pop eax
+ 0000034F  A2 0000011F R	mov byte ptr [var_e], al
+
+ 00000354  FF 35 00000003 R	push var_LTRL1
+ 0000035A  0F B6 05		movzx eax, byte ptr [var_e]
 	   0000011F R
- 0000035C  50			push eax
- 0000035D  0F B6 05		movzx eax, byte ptr [var_b]
-	   00000120 R
- 00000364  50			push eax
- 00000365  5B			pop ebx
- 00000366  58			pop eax
- 00000367  03 C3		add eax, ebx
- 00000369  50			push eax
- 0000036A  58			pop eax
- 0000036B  A2 00000121 R	mov byte ptr [var_usum], al
+ 00000361  50			push eax
+ 00000362  5B			pop ebx
+ 00000363  58			pop eax
+ 00000364  03 C3		add eax, ebx
+ 00000366  50			push eax
+ 00000367  E8 00000000 E	call outlich
 
- 00000370  0F B6 05		movzx eax, byte ptr [var_usum]
+ 0000036C  68 00000180 R	push offset var_LTRL44
+ 00000371  E8 00000000 E	call outrad
+
+ 00000376  FF 35 00000015 R	push var_LTRL4
+ 0000037C  58			pop eax
+ 0000037D  A2 00000120 R	mov byte ptr [var_o], al
+
+ 00000382  FF 35 00000182 R	push var_LTRL45
+ 00000388  58			pop eax
+ 00000389  A2 00000121 R	mov byte ptr [var_b], al
+
+ 0000038E  0F B6 05		movzx eax, byte ptr [var_o]
+	   00000120 R
+ 00000395  50			push eax
+ 00000396  0F B6 05		movzx eax, byte ptr [var_b]
 	   00000121 R
- 00000377  50			push eax
- 00000378  E8 00000000 E	call outlich
+ 0000039D  50			push eax
+ 0000039E  5B			pop ebx
+ 0000039F  58			pop eax
+ 000003A0  03 C3		add eax, ebx
+ 000003A2  50			push eax
+ 000003A3  58			pop eax
+ 000003A4  A2 00000122 R	mov byte ptr [var_u], al
 
- 0000037D  68 00000184 R	push offset var_LTRL45
- 00000382  E8 00000000 E	call outrad
-
- 00000387  0F B6 05		movzx eax, byte ptr [var_a]
-	   0000011F R
- 0000038E  50			push eax
- 0000038F  0F B6 05		movzx eax, byte ptr [var_b]
-	   00000120 R
- 00000396  50			push eax
- 00000397  5B			pop ebx
- 00000398  58			pop eax
- 00000399  0B C3		or eax, ebx
- 0000039B  50			push eax
- 0000039C  58			pop eax
- 0000039D  A2 00000122 R	mov byte ptr [var_bit_or], al
-
- 000003A2  0F B6 05		movzx eax, byte ptr [var_bit_or]
+ 000003A9  0F B6 05		movzx eax, byte ptr [var_u]
 	   00000122 R
- 000003A9  50			push eax
- 000003AA  E8 00000000 E	call outlich
+ 000003B0  50			push eax
+ 000003B1  E8 00000000 E	call outlich
 
- 000003AF  68 00000186 R	push offset var_LTRL46
- 000003B4  E8 00000000 E	call outrad
+ 000003B6  68 00000186 R	push offset var_LTRL46
+ 000003BB  E8 00000000 E	call outrad
 
- 000003B9  68 00000188 R	push offset var_LTRL47
- 000003BE  E8 00000000 E	call outrad
+ 000003C0  0F B6 05		movzx eax, byte ptr [var_o]
+	   00000120 R
+ 000003C7  50			push eax
+ 000003C8  0F B6 05		movzx eax, byte ptr [var_b]
+	   00000121 R
+ 000003CF  50			push eax
+ 000003D0  5B			pop ebx
+ 000003D1  58			pop eax
+ 000003D2  0B C3		or eax, ebx
+ 000003D4  50			push eax
+ 000003D5  58			pop eax
+ 000003D6  A2 00000123 R	mov byte ptr [var_bit_or], al
 
- 000003C3  6A 00		push 0
- 000003C5  E8 00000000 E	call ExitProcess
- 000003CA			main ENDP
+ 000003DB  0F B6 05		movzx eax, byte ptr [var_bit_or]
+	   00000123 R
+ 000003E2  50			push eax
+ 000003E3  E8 00000000 E	call outlich
+
+ 000003E8  68 00000188 R	push offset var_LTRL47
+ 000003ED  E8 00000000 E	call outrad
+
+ 000003F2  68 0000018A R	push offset var_LTRL48
+ 000003F7  E8 00000000 E	call outrad
+
+ 000003FC  6A 00		push 0
+ 000003FE  E8 00000000 E	call ExitProcess
+ 00000403			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/26/25 20:11:51
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/27/25 11:41:37
 out.asm							     Symbols 2 - 1
 
 
@@ -532,11 +556,11 @@ Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-CONST  . . . . . . . . . . . . .	32 Bit	 00000195 Para	  Public  'CONST'	 ReadOnly
+CONST  . . . . . . . . . . . . .	32 Bit	 00000197 Para	  Public  'CONST'	 ReadOnly
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000123 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000003CA Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000124 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000403 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -547,11 +571,11 @@ ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 atoii  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 isEven . . . . . . . . . . . . .	P Near	 00000021 _TEXT	Length= 0000000E Public STDCALL
   var_isEvenv  . . . . . . . . .	DWord	 bp + 00000008
-main . . . . . . . . . . . . . .	P Near	 0000002F _TEXT	Length= 0000039B Public STDCALL
-  lbl_if_end_1 . . . . . . . . .	L Near	 000001F5 _TEXT	
-  lbl_if_end_2 . . . . . . . . .	L Near	 0000021C _TEXT	
-  lbl_if_end_3 . . . . . . . . .	L Near	 0000024C _TEXT	
-  lbl_do_4 . . . . . . . . . . .	L Near	 000002EA _TEXT	
+main . . . . . . . . . . . . . .	P Near	 0000002F _TEXT	Length= 000003D4 Public STDCALL
+  lbl_if_end_1 . . . . . . . . .	L Near	 00000200 _TEXT	
+  lbl_if_end_2 . . . . . . . . .	L Near	 00000227 _TEXT	
+  lbl_if_end_3 . . . . . . . . .	L Near	 00000257 _TEXT	
+  lbl_do_4 . . . . . . . . . . .	L Near	 000002F5 _TEXT	
 outlich  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 outrad . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 str_len  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -615,25 +639,27 @@ var_LTRL40 . . . . . . . . . . .	Byte	 00000163 CONST
 var_LTRL41 . . . . . . . . . . .	Byte	 00000173 CONST	
 var_LTRL42 . . . . . . . . . . .	Byte	 0000017A CONST	
 var_LTRL43 . . . . . . . . . . .	DWord	 0000017C CONST	
-var_LTRL44 . . . . . . . . . . .	DWord	 00000180 CONST	
-var_LTRL45 . . . . . . . . . . .	Byte	 00000184 CONST	
+var_LTRL44 . . . . . . . . . . .	Byte	 00000180 CONST	
+var_LTRL45 . . . . . . . . . . .	DWord	 00000182 CONST	
 var_LTRL46 . . . . . . . . . . .	Byte	 00000186 CONST	
 var_LTRL47 . . . . . . . . . . .	Byte	 00000188 CONST	
+var_LTRL48 . . . . . . . . . . .	Byte	 0000018A CONST	
 var_LTRL4  . . . . . . . . . . .	DWord	 00000015 CONST	
 var_LTRL5  . . . . . . . . . . .	DWord	 00000019 CONST	
 var_LTRL6  . . . . . . . . . . .	Byte	 0000001D CONST	
 var_LTRL7  . . . . . . . . . . .	Byte	 0000002C CONST	
 var_LTRL8  . . . . . . . . . . .	Byte	 00000035 CONST	
 var_LTRL9  . . . . . . . . . . .	Byte	 00000037 CONST	
-var_a  . . . . . . . . . . . . .	Byte	 0000011F _DATA	
-var_bit_or . . . . . . . . . . .	Byte	 00000122 _DATA	
-var_b  . . . . . . . . . . . . .	Byte	 00000120 _DATA	
+var_bit_or . . . . . . . . . . .	Byte	 00000123 _DATA	
+var_b  . . . . . . . . . . . . .	Byte	 00000121 _DATA	
+var_e  . . . . . . . . . . . . .	Byte	 0000011F _DATA	
 var_flag . . . . . . . . . . . .	DWord	 00000115 _DATA	
 var_not_vbn  . . . . . . . . . .	Byte	 00000119 _DATA	
+var_o  . . . . . . . . . . . . .	Byte	 00000120 _DATA	
 var_sumres . . . . . . . . . . .	DWord	 00000104 _DATA	
 var_s  . . . . . . . . . . . . .	DWord	 00000111 _DATA	
 var_text . . . . . . . . . . . .	DWord	 0000011B _DATA	
-var_usum . . . . . . . . . . . .	Byte	 00000121 _DATA	
+var_u  . . . . . . . . . . . . .	Byte	 00000122 _DATA	
 var_varname  . . . . . . . . . .	Byte	 00000110 _DATA	
 var_vbn  . . . . . . . . . . . .	Byte	 0000011A _DATA	
 var_x  . . . . . . . . . . . . .	DWord	 00000108 _DATA	
