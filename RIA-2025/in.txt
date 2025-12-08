@@ -68,14 +68,14 @@ main {
 
 declare unsigned e;
 e = 0;
-cout 2 + e; cout "\n";
+cout 2 / e; cout "\n";
 
 declare unsigned o;
 declare unsigned b;
 o = 10;
 b = 40;
 declare unsigned u;
-u = o + b;
+u = (o + b / 2);
 cout u; cout "\n";   
 
 declare unsigned bit_or;

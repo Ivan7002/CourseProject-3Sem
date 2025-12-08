@@ -255,8 +255,9 @@ namespace Gener
 	{
 		vector <string> v = startFillVector(tables);
 		ofstream ofile(parm.out);
-		string funcname;	
-		int pcount = 0;			
+		string funcname;
+		int pcount = 0;
+		bool funcReturned = false; // Флаг, указывающий, была ли функция завершена return
 		string str;
 
 		for (int i = 0; i < tables.lextable.size; i++)
@@ -272,12 +273,66 @@ namespace Gener
 			{
 				funcname = ITENTRY(i + 2).id;
 				pcount = ITENTRY(i + 2).value.params.count;
+				funcReturned = false; // Сбросить флаг для новой функции
 				str = genFunctionCode(tables, i, funcname, pcount);
 				break;
 			}
 			case LEX_RETURN:
 			{
+				// Найти функцию в таблице идентификаторов для проверки типа
+				IT::Entry funcEntry;
+				bool funcFound = false;
+				for (int j = 0; j < tables.idtable.size; j++) {
+					if (strcmp(tables.idtable.table[j].id, funcname.c_str()) == 0 &&
+						tables.idtable.table[j].idtype == IT::IDTYPE::F) {
+						funcEntry = tables.idtable.table[j];
+						funcFound = true;
+						break;
+					}
+				}
+
+				bool hasReturnValue = (LEXEMA(i + 1) != LEX_SEPARATOR);
+				bool shouldReturnValue = funcFound && (funcEntry.iddatatype != IT::IDDATATYPE::PROC);
+
+				// Проверка согласованности return
+				if (funcFound) {
+					if (!shouldReturnValue && hasReturnValue) {
+						// Функция void, но пытается вернуть значение - ошибка
+						throw Error::GetError(317, tables.lextable.table[i].sn, 0);
+					}
+					else if (shouldReturnValue && hasReturnValue) {
+						// Проверка типа возвращаемого значения только для гарантированно простых случаев
+						char lexema = LEXEMA(i + 1);
+						char next_lexema = (i + 2 < tables.lextable.size) ? LEXEMA(i + 2) : LEX_SEPARATOR;
+
+						// Проверяем только если следующий токен - разделитель (простое выражение)
+						if (next_lexema == LEX_SEPARATOR) {
+							if (lexema == LEX_ID) {
+								// Переменные - проверяем тип
+								int idx = tables.lextable.table[i + 1].idxTI;
+								if (idx != NULLDX_TI) {
+									IT::IDDATATYPE returnType = tables.idtable.table[idx].iddatatype;
+									if (returnType != funcEntry.iddatatype && returnType != IT::IDDATATYPE::UNDEF) {
+										throw Error::GetError(317, tables.lextable.table[i].sn, 0);
+									}
+								}
+							} else if (lexema == LEX_LITERAL) {
+								// Литералы - проверяем тип
+								int idx = tables.lextable.table[i + 1].idxTI;
+								if (idx != NULLDX_TI) {
+									IT::IDDATATYPE returnType = tables.idtable.table[idx].iddatatype;
+									if (returnType != funcEntry.iddatatype && returnType != IT::IDDATATYPE::UNDEF) {
+										throw Error::GetError(317, tables.lextable.table[i].sn, 0);
+									}
+								}
+							}
+						}
+						// Для сложных выражений - пропускаем проверку типов
+					}
+				}
+
 				str = genExitCode(tables, i, funcname, pcount);
+				funcReturned = true; // Функция завершена return
 				break;
 			}
 			case LEX_EQUAL: 
@@ -349,10 +404,44 @@ namespace Gener
             }
             case LEX_RIGHT: // }
             {
-                if (!labelStack.empty() && labelStack.top().type == "if") 
+                if (!labelStack.empty() && labelStack.top().type == "if")
                 {
                      str += "lbl_if_end_" + itoS(labelStack.top().id) + ":\n";
                      labelStack.pop();
+                }
+
+                // Проверка завершения функции
+                if (!funcname.empty() && !funcReturned)
+                {
+                    // Найти функцию в таблице идентификаторов
+                    IT::Entry funcEntry;
+                    bool funcFound = false;
+                    int funcStartLine = 0;
+                    for (int j = 0; j < tables.idtable.size; j++) {
+                        if (strcmp(tables.idtable.table[j].id, funcname.c_str()) == 0 &&
+                            tables.idtable.table[j].idtype == IT::IDTYPE::F) {
+                            funcEntry = tables.idtable.table[j];
+                            funcStartLine = tables.lextable.table[funcEntry.idxfirstLE].sn + 1;
+                            funcFound = true;
+                            break;
+                        }
+                    }
+
+                    // Если функция должна возвращать значение, но не возвращает - ошибка
+                    if (funcFound && funcEntry.iddatatype != IT::IDDATATYPE::PROC) {
+                        throw Error::GetError(315, funcStartLine, 0);
+                    }
+
+                    // Генерировать код выхода из функции
+                    str += "; --- restore registers ---\npop edx\npop ebx\n; -------------------------\n";
+                    str += "ret\n";
+                    str += funcname + " ENDP" + SEPSTREMP;
+                    funcname.clear(); // Очистить имя функции
+                }
+                else if (!funcname.empty() && funcReturned)
+                {
+                    // Функция была завершена return, просто очищаем имя
+                    funcname.clear();
                 }
                 break;
             }
@@ -361,6 +450,12 @@ namespace Gener
 				v.push_back(str);
 			str.clear();
 		}
+
+		// Генерация завершения main
+		str = "\nret";
+		v.push_back(str);
+		str.clear();
+
 		v.push_back(END);
 		for (auto x : v)
 			ofile << x << endl;

@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/27/25 11:41:37
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    12/08/25 11:33:55
 out.asm							     Page 1 - 1
 
 
@@ -503,50 +503,58 @@ out.asm							     Page 1 - 1
  00000396  0F B6 05		movzx eax, byte ptr [var_b]
 	   00000121 R
  0000039D  50			push eax
- 0000039E  5B			pop ebx
- 0000039F  58			pop eax
- 000003A0  03 C3		add eax, ebx
- 000003A2  50			push eax
- 000003A3  58			pop eax
- 000003A4  A2 00000122 R	mov byte ptr [var_u], al
+ 0000039E  FF 35 00000003 R	push var_LTRL1
+ 000003A4  5B			pop ebx
+ 000003A5  58			pop eax
+ 000003A6  99			cdq
+ 000003A7  F7 FB		idiv ebx
+ 000003A9  50			push eax
+ 000003AA  5B			pop ebx
+ 000003AB  58			pop eax
+ 000003AC  03 C3		add eax, ebx
+ 000003AE  50			push eax
+ 000003AF  58			pop eax
+ 000003B0  A2 00000122 R	mov byte ptr [var_u], al
 
- 000003A9  0F B6 05		movzx eax, byte ptr [var_u]
+ 000003B5  0F B6 05		movzx eax, byte ptr [var_u]
 	   00000122 R
- 000003B0  50			push eax
- 000003B1  E8 00000000 E	call outlich
+ 000003BC  50			push eax
+ 000003BD  E8 00000000 E	call outlich
 
- 000003B6  68 00000186 R	push offset var_LTRL46
- 000003BB  E8 00000000 E	call outrad
+ 000003C2  68 00000186 R	push offset var_LTRL46
+ 000003C7  E8 00000000 E	call outrad
 
- 000003C0  0F B6 05		movzx eax, byte ptr [var_o]
+ 000003CC  0F B6 05		movzx eax, byte ptr [var_o]
 	   00000120 R
- 000003C7  50			push eax
- 000003C8  0F B6 05		movzx eax, byte ptr [var_b]
+ 000003D3  50			push eax
+ 000003D4  0F B6 05		movzx eax, byte ptr [var_b]
 	   00000121 R
- 000003CF  50			push eax
- 000003D0  5B			pop ebx
- 000003D1  58			pop eax
- 000003D2  0B C3		or eax, ebx
- 000003D4  50			push eax
- 000003D5  58			pop eax
- 000003D6  A2 00000123 R	mov byte ptr [var_bit_or], al
+ 000003DB  50			push eax
+ 000003DC  5B			pop ebx
+ 000003DD  58			pop eax
+ 000003DE  0B C3		or eax, ebx
+ 000003E0  50			push eax
+ 000003E1  58			pop eax
+ 000003E2  A2 00000123 R	mov byte ptr [var_bit_or], al
 
- 000003DB  0F B6 05		movzx eax, byte ptr [var_bit_or]
+ 000003E7  0F B6 05		movzx eax, byte ptr [var_bit_or]
 	   00000123 R
- 000003E2  50			push eax
- 000003E3  E8 00000000 E	call outlich
+ 000003EE  50			push eax
+ 000003EF  E8 00000000 E	call outlich
 
- 000003E8  68 00000188 R	push offset var_LTRL47
- 000003ED  E8 00000000 E	call outrad
+ 000003F4  68 00000188 R	push offset var_LTRL47
+ 000003F9  E8 00000000 E	call outrad
 
- 000003F2  68 0000018A R	push offset var_LTRL48
- 000003F7  E8 00000000 E	call outrad
+ 000003FE  68 0000018A R	push offset var_LTRL48
+ 00000403  E8 00000000 E	call outrad
 
- 000003FC  6A 00		push 0
- 000003FE  E8 00000000 E	call ExitProcess
- 00000403			main ENDP
+
+ 00000408  C3			ret
+ 00000409  6A 00		push 0
+ 0000040B  E8 00000000 E	call ExitProcess
+ 00000410			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.41.34120.0	    11/27/25 11:41:37
+Microsoft (R) Macro Assembler Version 14.41.34120.0	    12/08/25 11:33:55
 out.asm							     Symbols 2 - 1
 
 
@@ -560,7 +568,7 @@ CONST  . . . . . . . . . . . . .	32 Bit	 00000197 Para	  Public  'CONST'	 ReadOn
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000124 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000403 Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000410 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -571,7 +579,7 @@ ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 atoii  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 isEven . . . . . . . . . . . . .	P Near	 00000021 _TEXT	Length= 0000000E Public STDCALL
   var_isEvenv  . . . . . . . . .	DWord	 bp + 00000008
-main . . . . . . . . . . . . . .	P Near	 0000002F _TEXT	Length= 000003D4 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 0000002F _TEXT	Length= 000003E1 Public STDCALL
   lbl_if_end_1 . . . . . . . . .	L Near	 00000200 _TEXT	
   lbl_if_end_2 . . . . . . . . .	L Near	 00000227 _TEXT	
   lbl_if_end_3 . . . . . . . . .	L Near	 00000257 _TEXT	
