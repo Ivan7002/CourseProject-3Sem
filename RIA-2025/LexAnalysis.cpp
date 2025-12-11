@@ -4,6 +4,10 @@
 #include "Log.h"
 #include <stack>
 #include <string>
+#include <cstdlib>
+#include <cerrno>
+#include <limits>
+#include <cctype>
 
 #pragma warning(disable : 4996)
 
@@ -17,6 +21,30 @@ int DecimicalNotation(std::string input, int scaleofnot) {
 	catch (const std::out_of_range&) {
 		return input[0] == '-' ? INT_MINSIZE : INT_MAXSIZE;
 	}
+}
+
+// Проверка переполнения числового литерала с учетом целевого типа
+bool validateIntLiteral(const char* literal, IT::IDDATATYPE type)
+{
+	errno = 0;
+	char* end = nullptr;
+	long long value = std::strtoll(literal, &end, 10);
+
+	// Строка должна полностью состоять из числа
+	if (end == literal || *end != '\0')
+		return false;
+
+	// Переполнение strtoll
+	if (errno == ERANGE)
+		return false;
+
+	if (type == IT::IDDATATYPE::INT)
+		return value >= INT_MINSIZE && value <= INT_MAXSIZE;
+
+	if (type == IT::IDDATATYPE::UINT)
+		return value >= 0 && value <= UBYTE_MAXSIZE;
+
+	return false;
 }
 
 namespace Lexer
@@ -199,6 +227,14 @@ namespace Lexer
 
 		if (lex == LEX_LITERAL) 
 		{
+			// Дополнительная защита от переполнения числовых литералов
+			if ((type == IT::IDDATATYPE::INT || type == IT::IDDATATYPE::UINT) && !validateIntLiteral(id, type))
+			{
+				Log::writeError(log.stream, Error::GetError(313, line, 0));
+				lex_ok = false;
+				return nullptr;
+			}
+
 			bool int_ok = IT::SetValue(itentry, id);
 			if (!int_ok)
 			{
@@ -387,11 +423,12 @@ namespace Lexer
 					case LEX_TRUE:
 					case LEX_FALSE:
 					{
+
 						char id[STR_MAXSIZE] = "";
-						idxTI = NULLDX_TI; 
+						idxTI = NULLDX_TI;
 						if (*nextword == LEX_LEFTHESIS)
-							isFunc = true;						
-						
+							isFunc = true;
+
 						char* idtype = nullptr;
 						if (i > 0) idtype = in.words[i - 1].word;
 						

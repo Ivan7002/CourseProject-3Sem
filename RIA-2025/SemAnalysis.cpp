@@ -5,6 +5,7 @@
 #include "SemAnalysis.h"
 #include <set>
 #include <cstring>
+#include <limits>
 
 namespace Semantic
 {
@@ -68,6 +69,117 @@ namespace Semantic
 		}
 	}
 
+	bool checkOverflowAddition(int a, int b, IT::IDDATATYPE type)
+	{
+		if (type == IT::IDDATATYPE::INT)
+		{
+			if (b > 0 && a > INT_MAXSIZE - b) return true;
+			if (b < 0 && a < INT_MINSIZE - b) return true;
+		}
+		else if (type == IT::IDDATATYPE::UINT)
+		{
+			// Для unsigned (1 байт): проверяем что оба операнда >= 0 и результат не превышает UBYTE_MAXSIZE (255)
+			if (a < 0 || b < 0) return true; // unsigned не может быть отрицательным
+			if (a > UBYTE_MAXSIZE - b) return true;
+		}
+		return false;
+	}
+
+	bool checkOverflowSubtraction(int a, int b, IT::IDDATATYPE type)
+	{
+		if (type == IT::IDDATATYPE::INT)
+		{
+			if (b < 0 && a > INT_MAXSIZE + b) return true;
+			if (b > 0 && a < INT_MINSIZE + b) return true;
+		}
+		else if (type == IT::IDDATATYPE::UINT)
+		{
+			// Для unsigned: проверяем что оба операнда >= 0 и результат >= 0
+			if (a < 0 || b < 0) return true; // unsigned не может быть отрицательным
+			if (a < b) return true; // Результат будет отрицательным
+		}
+		return false;
+	}
+
+	bool checkOverflowMultiplication(int a, int b, IT::IDDATATYPE type)
+	{
+		if (type == IT::IDDATATYPE::INT)
+		{
+			if (a > 0 && b > 0 && a > INT_MAXSIZE / b) return true;
+			if (a > 0 && b < 0 && b < INT_MINSIZE / a) return true;
+			if (a < 0 && b > 0 && a < INT_MINSIZE / b) return true;
+			if (a < 0 && b < 0 && b < INT_MAXSIZE / a) return true;
+		}
+		else if (type == IT::IDDATATYPE::UINT)
+		{
+			// Для unsigned (1 байт): проверяем что оба операнда >= 0 и результат не превышает UBYTE_MAXSIZE (255)
+			if (a < 0 || b < 0) return true; // unsigned не может быть отрицательным
+			if (b != 0 && a > UBYTE_MAXSIZE / b) return true;
+		}
+		return false;
+	}
+
+	// Определяет тип выражения, начиная с позиции startIndex до точки с запятой.
+	// Нужен для проверки соответствия возвращаемого значения типу функции.
+	IT::IDDATATYPE inferExpressionType(Lexer::LEX& tables, int startIndex)
+	{
+		IT::IDDATATYPE exprType = IT::IDDATATYPE::UNDEF;
+		bool hasComparison = false;
+
+		for (int k = startIndex; k < tables.lextable.size; k++)
+		{
+			char lex = tables.lextable.table[k].lexema;
+
+			if (lex == LEX_SEPARATOR)
+				break;
+
+			// Если встретили закрывающую фигурную скобку после предыдущего выражения, выходим
+			if (lex == LEX_RIGHT && k > startIndex && tables.lextable.table[k - 1].lexema == LEX_SEPARATOR)
+				break;
+
+			switch (lex)
+			{
+			case LEX_EQUALS:
+			case LEX_NOTEQUALS:
+			case LEX_MORE:
+			case LEX_LESS:
+			case LEX_MOREEQUALS:
+			case LEX_LESSEQUALS:
+				hasComparison = true;
+				break;
+			}
+
+			if (tables.lextable.table[k].idxTI != NULLIDX_TI)
+			{
+				IT::IDDATATYPE current = tables.idtable.table[tables.lextable.table[k].idxTI].iddatatype;
+
+				if (exprType == IT::IDDATATYPE::UNDEF)
+				{
+					exprType = current;
+				}
+				else if (exprType != current)
+				{
+					bool bothNumeric = (exprType == IT::IDDATATYPE::INT || exprType == IT::IDDATATYPE::UINT) &&
+						(current == IT::IDDATATYPE::INT || current == IT::IDDATATYPE::UINT);
+
+					if (bothNumeric)
+					{
+						exprType = IT::IDDATATYPE::INT; // расширяем до целого при смешении int/uint
+					}
+					else if (hasComparison)
+					{
+						exprType = IT::IDDATATYPE::BOOL;
+					}
+				}
+			}
+		}
+
+		if (hasComparison)
+			return IT::IDDATATYPE::BOOL;
+
+		return exprType;
+	}
+
 	bool Semantic::semanticsCheck(Lexer::LEX& tables, Log::LOG& log)
 	{
 		bool sem_ok = true;
@@ -126,6 +238,18 @@ namespace Semantic
 					bool isConstantAssignment = true; // Предполагаем, что присваивание константы
 					int constantValue = 0;
 
+					// Анализируем выражение для поиска константных арифметических операций
+					bool hasArithmetic = false;
+					int leftOperand = 0, rightOperand = 0;
+					char operation = 0;
+					bool leftOpConst = false, rightOpConst = false;
+					// Дополнительный трекер: const OP const для переполнений (напр. 250 + 10 при unsigned)
+					int lastConstValue = 0;
+					bool lastConstValid = false;
+					int pendingLeftConst = 0;
+					char pendingOp = 0;
+					bool hasPendingOp = false;
+
 					for (int k = i + 1; k < tables.lextable.size && tables.lextable.table[k].lexema != LEX_SEPARATOR; k++)
 					{
 						if (tables.lextable.table[k].idxTI != NULLIDX_TI)
@@ -145,6 +269,25 @@ namespace Semantic
 								if (tables.lextable.table[k].lexema == LEX_LITERAL)
 								{
 									constantValue = tables.idtable.table[tables.lextable.table[k].idxTI].value.vint;
+
+									// Немедленная проверка диапазона для присваивания в unsigned
+									if (lefttype == IT::IDDATATYPE::UINT && (constantValue < 0 || constantValue > UBYTE_MAXSIZE))
+									{
+										Log::writeError(log.stream, Error::GetError(619, tables.lextable.table[k].sn, 0));
+										sem_ok = false;
+									}
+
+									// Если мы ищем операнды для арифметической операции
+									if (hasArithmetic && !leftOpConst)
+									{
+										leftOperand = constantValue;
+										leftOpConst = true;
+									}
+									else if (hasArithmetic && leftOpConst && !rightOpConst)
+									{
+										rightOperand = constantValue;
+										rightOpConst = true;
+									}
 								}
 								else if (tables.lextable.table[k].lexema == LEX_ID)
 								{
@@ -153,6 +296,18 @@ namespace Semantic
 									if (constVal != INT_MAX)
 									{
 										constantValue = constVal;
+
+										// Если мы ищем операнды для арифметической операции
+										if (hasArithmetic && !leftOpConst)
+										{
+											leftOperand = constVal;
+											leftOpConst = true;
+										}
+										else if (hasArithmetic && leftOpConst && !rightOpConst)
+										{
+											rightOperand = constVal;
+											rightOpConst = true;
+										}
 									}
 									else
 									{
@@ -162,6 +317,36 @@ namespace Semantic
 								else
 								{
 									isConstantAssignment = false;
+								}
+
+								// Обновляем трекер последних констант
+								if (tables.lextable.table[k].lexema == LEX_LITERAL || (tables.lextable.table[k].lexema == LEX_ID && getConstantValue(constTracker, tables.idtable.table[tables.lextable.table[k].idxTI].id) != INT_MAX))
+								{
+									int val = constantValue;
+									lastConstValue = val;
+									lastConstValid = true;
+
+									if (hasPendingOp)
+									{
+										bool overflow = false;
+										switch (pendingOp)
+										{
+										case LEX_PLUS:
+											overflow = checkOverflowAddition(pendingLeftConst, val, lefttype);
+											if (overflow) Log::writeError(log.stream, Error::GetError(616, tables.lextable.table[k].sn, 0));
+											break;
+										case LEX_MINUS:
+											overflow = checkOverflowSubtraction(pendingLeftConst, val, lefttype);
+											if (overflow) Log::writeError(log.stream, Error::GetError(617, tables.lextable.table[k].sn, 0));
+											break;
+										case LEX_STAR:
+											overflow = checkOverflowMultiplication(pendingLeftConst, val, lefttype);
+											if (overflow) Log::writeError(log.stream, Error::GetError(618, tables.lextable.table[k].sn, 0));
+											break;
+										}
+										if (overflow) sem_ok = false;
+										hasPendingOp = false;
+									}
 								}
 							}
 
@@ -179,12 +364,65 @@ namespace Semantic
 						}
 						else
 						{
-							// Если есть операторы, то это не простое присваивание константы
+							// Если есть операторы, проверяем на арифметические операции
 							char l = tables.lextable.table[k].lexema;
-							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR || l == LEX_DIRSLASH || l == LEX_PERSENT)
+							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR)
+							{
+								hasArithmetic = true;
+								operation = l;
+								isConstantAssignment = false; // Сбрасываем флаг простого присваивания
+
+								// Если слева уже была константа, фиксируем её для проверки переполнения после получения правой
+								if (lastConstValid)
+								{
+									pendingLeftConst = lastConstValue;
+									pendingOp = l;
+									hasPendingOp = true;
+								}
+							}
+							else if (l == LEX_DIRSLASH || l == LEX_PERSENT)
 							{
 								isConstantAssignment = false;
 							}
+						}
+
+						// Если нашли арифметическую операцию с двумя константами, проверяем переполнение
+						if (hasArithmetic && leftOpConst && rightOpConst)
+						{
+							bool overflow = false;
+							if (operation == LEX_PLUS)
+							{
+								overflow = checkOverflowAddition(leftOperand, rightOperand, lefttype);
+								if (overflow)
+								{
+									Log::writeError(log.stream, Error::GetError(616, tables.lextable.table[k].sn, 0));
+									sem_ok = false;
+								}
+							}
+							else if (operation == LEX_MINUS)
+							{
+								overflow = checkOverflowSubtraction(leftOperand, rightOperand, lefttype);
+								if (overflow)
+								{
+									Log::writeError(log.stream, Error::GetError(617, tables.lextable.table[k].sn, 0));
+									sem_ok = false;
+								}
+							}
+							else if (operation == LEX_STAR)
+							{
+								overflow = checkOverflowMultiplication(leftOperand, rightOperand, lefttype);
+								if (overflow)
+								{
+									Log::writeError(log.stream, Error::GetError(618, tables.lextable.table[k].sn, 0));
+									sem_ok = false;
+								}
+							}
+
+							// Сбрасываем флаги для поиска следующих операций
+							hasArithmetic = false;
+							leftOpConst = false;
+							rightOpConst = false;
+							operation = 0;
 						}
 
 						if (lefttype == IT::IDDATATYPE::STR)
@@ -199,9 +437,27 @@ namespace Semantic
 						}
 					}
 
-					// Если присваивание константы, запоминаем её
+					// Проверяем переполнение при присваивании константы
 					if (isConstantAssignment && leftVarName[0] != '\0')
 					{
+						// Проверка диапазона для типа переменной
+						if (lefttype == IT::IDDATATYPE::INT)
+						{
+							if (constantValue > INT_MAXSIZE || constantValue < INT_MINSIZE)
+							{
+								Log::writeError(log.stream, Error::GetError(619, tables.lextable.table[i].sn, 0));
+								sem_ok = false;
+							}
+						}
+						else if (lefttype == IT::IDDATATYPE::UINT)
+						{
+							if (constantValue < 0 || constantValue > UBYTE_MAXSIZE)
+							{
+								Log::writeError(log.stream, Error::GetError(619, tables.lextable.table[i].sn, 0));
+								sem_ok = false;
+							}
+						}
+
 						setConstantValue(constTracker, leftVarName, constantValue);
 					}
 					else if (leftVarName[0] != '\0')
@@ -217,7 +473,9 @@ namespace Semantic
 			{
 				IT::Entry e = tables.idtable.table[tables.lextable.table[i].idxTI];
 
-				if (i > 0 && tables.lextable.table[i - 1].lexema == LEX_FUNCTION)
+				// Имя функции следует либо сразу за LEX_FUNCTION, либо через токен типа
+				if ((i > 0 && tables.lextable.table[i - 1].lexema == LEX_FUNCTION) ||
+					(i > 1 && tables.lextable.table[i - 2].lexema == LEX_FUNCTION))
 				{
 					if (e.idtype == IT::IDTYPE::F) 
 					{
@@ -226,17 +484,33 @@ namespace Semantic
 							char l = tables.lextable.table[k].lexema;
 							if (l == LEX_RETURN)
 							{
-								if (k + 1 < tables.lextable.size) {
-									int next = tables.lextable.table[k + 1].idxTI; 
-									if (next != NULLIDX_TI)
+								int exprStart = k + 1;
+								bool hasReturnExpr = exprStart < tables.lextable.size && tables.lextable.table[exprStart].lexema != LEX_SEPARATOR;
+								IT::IDDATATYPE exprType = IT::IDDATATYPE::UNDEF;
+
+								if (hasReturnExpr)
+								{
+									exprType = inferExpressionType(tables, exprStart);
+
+									// Простой случай вида "return id;"
+									if (exprType == IT::IDDATATYPE::UNDEF && tables.lextable.table[exprStart].idxTI != NULLIDX_TI)
 									{
-										if (tables.idtable.table[next].iddatatype != e.iddatatype)
-										{
-											Log::writeError(log.stream, Error::GetError(315, tables.lextable.table[k].sn, 0));
-											sem_ok = false;
-											break;
-										}
+										exprType = tables.idtable.table[tables.lextable.table[exprStart].idxTI].iddatatype;
 									}
+
+									bool numericCompatible = (exprType == IT::IDDATATYPE::INT || exprType == IT::IDDATATYPE::UINT) &&
+										(e.iddatatype == IT::IDDATATYPE::INT || e.iddatatype == IT::IDDATATYPE::UINT);
+
+									if (exprType != IT::IDDATATYPE::UNDEF && !(exprType == e.iddatatype || numericCompatible))
+									{
+										Log::writeError(log.stream, Error::GetError(315, tables.lextable.table[k].sn, 0));
+										sem_ok = false;
+									}
+								}
+								else if (e.iddatatype != IT::IDDATATYPE::PROC)
+								{
+									Log::writeError(log.stream, Error::GetError(315, tables.lextable.table[k].sn, 0));
+									sem_ok = false;
 								}
 								break; 
 							}
@@ -283,23 +557,68 @@ namespace Semantic
 			case LEX_BITOR: case LEX_BITAND: case LEX_BITNOT:
 			{
 				bool flag = true;
+				IT::IDDATATYPE leftType = IT::IDDATATYPE::UNDEF;
+				IT::IDDATATYPE rightType = IT::IDDATATYPE::UNDEF;
+				int leftVal = 0;
+				int rightVal = 0;
+				bool leftIsConst = false;
+				bool rightIsConst = false;
+
 				if (i > 0 && tables.lextable.table[i - 1].idxTI != NULLIDX_TI)
 				{
-					IT::IDDATATYPE t = tables.idtable.table[tables.lextable.table[i - 1].idxTI].iddatatype;
-					if (t != IT::IDDATATYPE::INT && t != IT::IDDATATYPE::UINT && t != IT::IDDATATYPE::BOOL)
+					leftType = tables.idtable.table[tables.lextable.table[i - 1].idxTI].iddatatype;
+					if (leftType != IT::IDDATATYPE::INT && leftType != IT::IDDATATYPE::UINT && leftType != IT::IDDATATYPE::BOOL)
 						flag = false;
+
+					// Check if left operand is a constant
+					if (tables.lextable.table[i - 1].lexema == LEX_LITERAL)
+					{
+						leftVal = tables.idtable.table[tables.lextable.table[i - 1].idxTI].value.vint;
+						leftIsConst = true;
+					}
+					else if (tables.lextable.table[i - 1].lexema == LEX_ID)
+					{
+						char* varName = tables.idtable.table[tables.lextable.table[i - 1].idxTI].id;
+						int constVal = getConstantValue(constTracker, varName);
+						if (constVal != INT_MAX)
+						{
+							leftVal = constVal;
+							leftIsConst = true;
+						}
+					}
 				}
 				if (i + 1 < tables.lextable.size && tables.lextable.table[i + 1].idxTI != NULLIDX_TI)
 				{
-					IT::IDDATATYPE t = tables.idtable.table[tables.lextable.table[i + 1].idxTI].iddatatype;
-					if (t != IT::IDDATATYPE::INT && t != IT::IDDATATYPE::UINT && t != IT::IDDATATYPE::BOOL)
+					rightType = tables.idtable.table[tables.lextable.table[i + 1].idxTI].iddatatype;
+					if (rightType != IT::IDDATATYPE::INT && rightType != IT::IDDATATYPE::UINT && rightType != IT::IDDATATYPE::BOOL)
 						flag = false;
+
+					// Check if right operand is a constant
+					if (tables.lextable.table[i + 1].lexema == LEX_LITERAL)
+					{
+						rightVal = tables.idtable.table[tables.lextable.table[i + 1].idxTI].value.vint;
+						rightIsConst = true;
+					}
+					else if (tables.lextable.table[i + 1].lexema == LEX_ID)
+					{
+						char* varName = tables.idtable.table[tables.lextable.table[i + 1].idxTI].id;
+						int constVal = getConstantValue(constTracker, varName);
+						if (constVal != INT_MAX)
+						{
+							rightVal = constVal;
+							rightIsConst = true;
+						}
+					}
 				}
+
 				if (!flag)
 				{
 					Log::writeError(log.stream, Error::GetError(317, tables.lextable.table[i].sn, 0));
 					sem_ok = false;
 				}
+
+				// Note: Overflow checking moved to assignment context (LEX_EQUAL case)
+				// to properly check against target variable type
 				break;
 			}
 			}

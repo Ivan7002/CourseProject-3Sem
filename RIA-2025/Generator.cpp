@@ -279,59 +279,21 @@ namespace Gener
 			}
 			case LEX_RETURN:
 			{
-				// Найти функцию в таблице идентификаторов для проверки типа
-				IT::Entry funcEntry;
-				bool funcFound = false;
-				for (int j = 0; j < tables.idtable.size; j++) {
-					if (strcmp(tables.idtable.table[j].id, funcname.c_str()) == 0 &&
-						tables.idtable.table[j].idtype == IT::IDTYPE::F) {
-						funcEntry = tables.idtable.table[j];
-						funcFound = true;
-						break;
-					}
+				// Генерируем код вычисления выражения return (если есть)
+				int k = i + 1;
+				if (LEXEMA(k) != LEX_SEPARATOR)
+				{
+					str += genExpressionCode(tables, log, k);
+					str += "pop eax\n"; // результат в eax
+					i = k; // пропускаем выражение
 				}
 
-				bool hasReturnValue = (LEXEMA(i + 1) != LEX_SEPARATOR);
-				bool shouldReturnValue = funcFound && (funcEntry.iddatatype != IT::IDDATATYPE::PROC);
-
-				// Проверка согласованности return
-				if (funcFound) {
-					if (!shouldReturnValue && hasReturnValue) {
-						// Функция void, но пытается вернуть значение - ошибка
-						throw Error::GetError(317, tables.lextable.table[i].sn, 0);
-					}
-					else if (shouldReturnValue && hasReturnValue) {
-						// Проверка типа возвращаемого значения только для гарантированно простых случаев
-						char lexema = LEXEMA(i + 1);
-						char next_lexema = (i + 2 < tables.lextable.size) ? LEXEMA(i + 2) : LEX_SEPARATOR;
-
-						// Проверяем только если следующий токен - разделитель (простое выражение)
-						if (next_lexema == LEX_SEPARATOR) {
-							if (lexema == LEX_ID) {
-								// Переменные - проверяем тип
-								int idx = tables.lextable.table[i + 1].idxTI;
-								if (idx != NULLDX_TI) {
-									IT::IDDATATYPE returnType = tables.idtable.table[idx].iddatatype;
-									if (returnType != funcEntry.iddatatype && returnType != IT::IDDATATYPE::UNDEF) {
-										throw Error::GetError(317, tables.lextable.table[i].sn, 0);
-									}
-								}
-							} else if (lexema == LEX_LITERAL) {
-								// Литералы - проверяем тип
-								int idx = tables.lextable.table[i + 1].idxTI;
-								if (idx != NULLDX_TI) {
-									IT::IDDATATYPE returnType = tables.idtable.table[idx].iddatatype;
-									if (returnType != funcEntry.iddatatype && returnType != IT::IDDATATYPE::UNDEF) {
-										throw Error::GetError(317, tables.lextable.table[i].sn, 0);
-									}
-								}
-							}
-						}
-						// Для сложных выражений - пропускаем проверку типов
-					}
-				}
-
-				str = genExitCode(tables, i, funcname, pcount);
+				// Завершение функции
+				str += "; --- restore registers ---\n";
+				str += "pop edx\npop ebx\n";
+				str += "; -------------------------\n";
+				str += "ret\n";
+				str += funcname + " ENDP" + SEPSTREMP;
 				funcReturned = true; // Функция завершена return
 				break;
 			}
