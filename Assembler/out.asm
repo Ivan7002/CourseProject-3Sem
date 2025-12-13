@@ -302,11 +302,6 @@ mov var_flag, eax
 push var_flag
 pop eax
 cmp eax, 0
-sete al
-movzx eax, al
-push eax
-pop eax
-cmp eax, 0
 je lbl_if_end_1
 
 push offset var_LTRL25

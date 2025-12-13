@@ -3,19 +3,36 @@
   "WorkspaceRootPath": "D:\\Course Project 3 Sem\\RIA-2025\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:PolishNotation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:PolishNotation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\in.txt.log||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:in.txt.log||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{95F31E07-B489-4E7A-AFA2-C67AEC73D0E9}|..\\Assembler\\Assembler.vcxproj|D:\\Course Project 3 Sem\\Assembler\\out.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\GRB.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:GRB.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:LexAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Generator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Generator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Parm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Parm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:LexAnalysis.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\IT.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:IT.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\In.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -26,12 +43,15 @@
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:FST.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{95F31E07-B489-4E7A-AFA2-C67AEC73D0E9}|..\\Assembler\\Assembler.vcxproj|D:\\Course Project 3 Sem\\Assembler\\out.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Parm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Parm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:LexAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\In.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -46,24 +66,12 @@
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:in.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:PolishNotation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\SemAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:SemAnalysis.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:PolishNotation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Header.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Header.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|D:\\Course Project 3 Sem\\RIA-2025\\Generator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7CAAB86C-C527-4939-B2EF-857990943DD9}|RIA-2025.vcxproj|solutionrelative:Generator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Course Project\\Assembler\\out.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
@@ -79,61 +87,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Error.cpp",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp",
-              "RelativeDocumentMoniker": "Error.cpp",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp",
-              "RelativeToolTip": "Error.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "GRB.cpp",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\GRB.cpp",
+              "RelativeDocumentMoniker": "GRB.cpp",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\GRB.cpp",
+              "RelativeToolTip": "GRB.cpp",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-10T16:45:42.844Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LexAnalysis.h",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h",
-              "RelativeDocumentMoniker": "LexAnalysis.h",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h",
-              "RelativeToolTip": "LexAnalysis.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-10T16:45:31.243Z",
+              "WhenOpened": "2025-12-12T15:27:12.29Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "IT.cpp",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\IT.cpp",
+              "RelativeDocumentMoniker": "IT.cpp",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\IT.cpp",
+              "RelativeToolTip": "IT.cpp",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-12T15:09:35.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Parm.cpp",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Parm.cpp",
               "RelativeDocumentMoniker": "Parm.cpp",
               "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\Parm.cpp",
               "RelativeToolTip": "Parm.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-10T13:24:33.808Z"
+              "WhenOpened": "2025-12-10T13:24:33.808Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "In.h",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\In.h",
-              "RelativeDocumentMoniker": "In.h",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\In.h",
-              "RelativeToolTip": "In.h",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-10T10:07:57.53Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "In.cpp",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\In.cpp",
               "RelativeDocumentMoniker": "In.cpp",
@@ -146,20 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "out.asm",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\Assembler\\out.asm",
-              "RelativeDocumentMoniker": "..\\Assembler\\out.asm",
-              "ToolTip": "D:\\Course Project 3 Sem\\Assembler\\out.asm",
-              "RelativeToolTip": "..\\Assembler\\out.asm",
-              "ViewState": "AgIAAPcBAAAAAAAAAAAswA4CAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-09T20:08:36.021Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "in.txt",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\in.txt",
               "RelativeDocumentMoniker": "in.txt",
@@ -171,33 +155,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "LexAnalysis.cpp",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.cpp",
               "RelativeDocumentMoniker": "LexAnalysis.cpp",
               "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.cpp",
               "RelativeToolTip": "LexAnalysis.cpp",
-              "ViewState": "AgIAABACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-08T16:51:59.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "FST.cpp",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\FST.cpp",
               "RelativeDocumentMoniker": "FST.cpp",
               "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\FST.cpp",
               "RelativeToolTip": "FST.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAABgAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADsAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-08T08:45:33.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "SemAnalysis.h",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\SemAnalysis.h",
               "RelativeDocumentMoniker": "SemAnalysis.h",
@@ -209,20 +193,107 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "in.txt.log",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\in.txt.log",
               "RelativeDocumentMoniker": "in.txt.log",
               "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\in.txt.log",
               "RelativeToolTip": "in.txt.log",
-              "ViewState": "AgIAANwPAAAAAAAAAAAAAIsPAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAAMNAAAAAAAAAAAAAAANAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-12-08T08:35:53.459Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 0,
+              "Title": "PolishNotation.cpp",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp",
+              "RelativeDocumentMoniker": "PolishNotation.cpp",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp",
+              "RelativeToolTip": "PolishNotation.cpp",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAAAO8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-06T08:24:42.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PolishNotation.h",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h",
+              "RelativeDocumentMoniker": "PolishNotation.h",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h",
+              "RelativeToolTip": "PolishNotation.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-06T08:25:00.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "out.asm",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\Assembler\\out.asm",
+              "RelativeDocumentMoniker": "..\\Assembler\\out.asm",
+              "ToolTip": "D:\\Course Project 3 Sem\\Assembler\\out.asm",
+              "RelativeToolTip": "..\\Assembler\\out.asm",
+              "ViewState": "AgIAAPcBAAAAAAAAAAAswA4CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-12-09T20:08:36.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Generator.h",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Generator.h",
+              "RelativeDocumentMoniker": "Generator.h",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\Generator.h",
+              "RelativeToolTip": "Generator.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-11-26T13:29:49.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "In.h",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\In.h",
+              "RelativeDocumentMoniker": "In.h",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\In.h",
+              "RelativeToolTip": "In.h",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-10T10:07:57.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LexAnalysis.h",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h",
+              "RelativeDocumentMoniker": "LexAnalysis.h",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\LexAnalysis.h",
+              "RelativeToolTip": "LexAnalysis.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-10T16:45:31.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Error.cpp",
+              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp",
+              "RelativeDocumentMoniker": "Error.cpp",
+              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\Error.cpp",
+              "RelativeToolTip": "Error.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-10T16:45:42.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Header.h",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Header.h",
               "RelativeDocumentMoniker": "Header.h",
@@ -234,43 +305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "PolishNotation.h",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h",
-              "RelativeDocumentMoniker": "PolishNotation.h",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.h",
-              "RelativeToolTip": "PolishNotation.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-06T08:25:00.696Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PolishNotation.cpp",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp",
-              "RelativeDocumentMoniker": "PolishNotation.cpp",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\PolishNotation.cpp",
-              "RelativeToolTip": "PolishNotation.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-06T08:24:42.793Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Generator.h",
-              "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\Generator.h",
-              "RelativeDocumentMoniker": "Generator.h",
-              "ToolTip": "D:\\Course Project 3 Sem\\RIA-2025\\Generator.h",
-              "RelativeToolTip": "Generator.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-26T13:29:49.099Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "out.asm",
               "DocumentMoniker": "D:\\Course Project\\Assembler\\out.asm",
               "RelativeDocumentMoniker": "..\\..\\Course Project\\Assembler\\out.asm",
@@ -282,7 +317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "RIA-2025.cpp",
               "DocumentMoniker": "D:\\Course Project 3 Sem\\RIA-2025\\RIA-2025.cpp",
               "RelativeDocumentMoniker": "RIA-2025.cpp",
@@ -294,7 +329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "StaticLibrary.cpp",
               "DocumentMoniker": "D:\\Course Project\\StaticLibrary\\StaticLibrary.cpp",
               "RelativeDocumentMoniker": "..\\..\\Course Project\\StaticLibrary\\StaticLibrary.cpp",
