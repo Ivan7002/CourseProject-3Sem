@@ -1,9 +1,53 @@
+# =========================
+# Executables & binaries
+# =========================
 *.exe
+*.dll
+*.lib
 *.obj
 *.o
+*.pdb
+*.ilk
+
+# =========================
+# Logs & temporary files
+# =========================
 *.log
 *.tmp
-/.vs
-/build
-/bin
 
+# =========================
+# Visual Studio folders
+# =========================
+.vs/
+Debug/
+Release/
+x64/
+x86/
+
+# =========================
+# Visual Studio build artifacts
+# =========================
+*.tlog
+*.ipch
+*.recipe
+*.lastbuildstate
+*.idb
+
+# =========================
+# Visual Studio database files
+# =========================
+*.db
+*.db-shm
+*.db-wal
+
+# =========================
+# Build output folders
+# =========================
+build/
+bin/
+
+# =========================
+# Other
+# =========================
+*.user
+*.suo
