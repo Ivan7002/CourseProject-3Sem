@@ -88,7 +88,7 @@ namespace IT
 	}
 	void writeIdTable(std::ostream* stream, IT::IdTable& idtable)
 	{
-		*stream << "----------------------------   ------------------------\n" << std::endl;
+		*stream << "---------------------------- ID Table ------------------------\n" << std::endl;
 		*stream << "|  N  |  |   |                |  ()" << std::endl;
 		for (int i = 0; i < idtable.size; i++)
 		{

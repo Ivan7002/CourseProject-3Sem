@@ -5,34 +5,33 @@
 int wmain(int argc, wchar_t* argv[])
 {
 
-	char LEXERROR[] = "Лексический анализ завершен с ошибками";
-	char SYNTERROR[] = "Синтаксический анализ завершен с ошибками";
-	char SEMERROR[] = "Обнаружены семантические ошибки";
-	char POLISHERROR[] = "Ошибка при попытке преобразования выражения";
-	char LEXGOOD[] = "Лексический анализ завершен без ошибок";
-	char SYNTGOOD[] = "Синтаксический анализ завершен без ошибок";
-	char SEMGOOD[] = "Семантический анализ завершен без ошибок";
-	char POLISHGOOD[] = "Преобразование выражений завершено без ошибок";
-	char MESSAGE[] = "--------------------КОНЕЧНЫЕ ТАБЛИЦЫ ЛЕКСЕМ И ИДЕНТИФИКАТОРОВ-------------------";
-	char STOP[] = "\nВыполние программы остановлено";
-	char ALLGOOD[] = "Программа успешно завершена!";
-	setlocale(LC_ALL, "Russian");
+	char LEXERROR[] = "Lexical analysis completed with errors";
+	char SYNTERROR[] = "Syntax analysis completed with errors";
+	char SEMERROR[] = "Semantic analysis completed with errors";
+	char POLISHERROR[] = "Error during Polish notation generation";
+	char LEXGOOD[] = "Lexical analysis completed successfully";
+	char SYNTGOOD[] = "Syntax analysis completed successfully";
+	char SEMGOOD[] = "Semantic analysis completed successfully";
+	char POLISHGOOD[] = "Polish notation generated successfully";
+	char MESSAGE[] = "--------------------Compilation and code generation result-------------------";
+	char STOP[] = "\nProgram execution completed";
+	char ALLGOOD[] = "All compilation stages completed!";
 	Log::LOG log;
 
 	try
 	{
-		Parm::PARM parm = Parm::getparm(argc, argv);                            //получить параметры
+		Parm::PARM parm = Parm::getparm(argc, argv);                            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		log = Log::getstream(parm.log);
-		Log::writeLog(log);														//написать заголовок журнала
-		Log::writeParm(log, parm);												//записать в журнал параметры
+		Log::writeLog(log);														//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		Log::writeParm(log, parm);												//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		In::IN in = In::getin(parm.in, log.stream);
 		Log::writeIn(log.stream, in);
 
-		in.words = In::getWordsTable(log.stream, in.text, in.code, in.size);	//разобрать на токены
+		in.words = In::getWordsTable(log.stream, in.text, in.code, in.size);	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		Lexer::LEX tables;
-		bool lex_ok = Lexer::analyze(tables, in, log, parm);					//выполнить лексический анализ
-		LT::writeLexTable(log.stream, tables.lextable);							//записать в журнал таблицы лексем и идентификаторов 
-		IT::writeIdTable(log.stream, tables.idtable);							//а также соответствие токенов и лексем
+		bool lex_ok = Lexer::analyze(tables, in, log, parm);					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		LT::writeLexTable(log.stream, tables.lextable);							//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+		IT::writeIdTable(log.stream, tables.idtable);							//пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		LT::writeLexemsOnLines(log.stream, tables.lextable);
 		if (!lex_ok)
 		{
@@ -45,10 +44,10 @@ int wmain(int argc, wchar_t* argv[])
 			Log::writeLine(&std::cout, LEXGOOD, "");
 		}
 		MFST_TRACE_START(log.stream);
-		MFST::Mfst mfst(tables, GRB::getGreibach());							//выполнить синтаксический анализ
+		MFST::Mfst mfst(tables, GRB::getGreibach());							//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		bool synt_ok = mfst.start(log);
 		mfst.savededucation();
-		mfst.printrules(log);													//вывести дерево разбора
+		mfst.printrules(log);													//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if (!synt_ok)
 		{
 			Log::writeLine(log.stream, SYNTERROR, "");
@@ -56,7 +55,7 @@ int wmain(int argc, wchar_t* argv[])
 			return 0;
 		}
 		else Log::writeLine(&std::cout, SYNTGOOD, "");
-		bool sem_ok = Semantic::semanticsCheck(tables, log);					//выполнить семантический анализ
+		bool sem_ok = Semantic::semanticsCheck(tables, log);					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		if (!sem_ok)
 		{
 			Log::writeLine(log.stream, SEMERROR, "");
@@ -64,7 +63,7 @@ int wmain(int argc, wchar_t* argv[])
 			return 0;
 		}
 		else Log::writeLine(&std::cout, SEMGOOD, "");
-		bool polish_ok = Polish::PolishNotation(tables, log);					//выполнить преобразование выражений в ПОЛИЗ
+		bool polish_ok = Polish::PolishNotation(tables, log);					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 		if (!polish_ok)
 		{
 			Log::writeLine(log.stream, POLISHERROR, "");
@@ -73,22 +72,22 @@ int wmain(int argc, wchar_t* argv[])
 		}
 		else Log::writeLine(&std::cout, POLISHGOOD, "");
 		Log::writeLine(log.stream, MESSAGE, "");
-		LT::writeLexTable(log.stream, tables.lextable);							//записать в журнал новые таблицы лексем и идентификаторов
+		LT::writeLexTable(log.stream, tables.lextable);							//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		IT::writeIdTable(log.stream, tables.idtable);
-		LT::writeLexemsOnLines(log.stream, tables.lextable);					//а также соответствие токенов и лексем
+		LT::writeLexemsOnLines(log.stream, tables.lextable);					//пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		//Log::writeLine(&std::cout, MESSAGE, "");
-		//IT::writeIdTable(&std::cout, tables.idtable);							//записать в командную строку новые таблицы лексем и идентификаторов 
-		//LT::writeLexTable(&std::cout, tables.lextable);							//а также соответствие токенов и лексем
+		//IT::writeIdTable(&std::cout, tables.idtable);							//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+		//LT::writeLexTable(&std::cout, tables.lextable);							//пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		//LT::writeLexemsOnLines(&std::cout, tables.lextable);
 
-		Gener::CodeGeneration(tables, parm, log);								//выполнить генерацию кода
-		//Log::writeLine(log.stream, ALLGOOD, "");									//итог работы программы
+		Gener::CodeGeneration(tables, parm, log);								//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+		//Log::writeLine(log.stream, ALLGOOD, "");									//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		//Log::writeLine(&std::cout, ALLGOOD, "");
-		//Log::Close(log);													    //закрыть журнал
+		//Log::Close(log);													    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	}
 	catch (Error::ERROR e)
 	{
-		std::cout << "Ошибка " << e.id << ": " << e.message << ", строка " << e.position.line << ", позиция " << e.position.col << std::endl;
+		std::cout << "Error " << e.id << ": " << e.message << ", line " << e.position.line << ", column " << e.position.col << std::endl;
 		system("pause");
 	}
 	return 0;

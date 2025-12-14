@@ -27,7 +27,7 @@ ExitProcess PROTO:DWORD
 		var_LTRL1 sdword 2
 		var_LTRL2 sdword 0
 		var_LTRL3 byte 'StartDemo', 0
-		var_LTRL4 sdword 10
+		var_LTRL4 sdword 500
 		var_LTRL5 sdword 3
 		var_LTRL6 byte 'x = 10, y = 3', 10, 0
 		var_LTRL7 byte 'x + y = ', 0
@@ -44,36 +44,39 @@ ExitProcess PROTO:DWORD
 		var_LTRL18 byte 10, 0
 		var_LTRL19 byte 'Bitwise AND (x & y): ', 0
 		var_LTRL20 byte 10, 0
-		var_LTRL21 byte 'Bitwise NOT (~vbn): ', 0
-		var_LTRL22 byte 10, 0
-		var_LTRL23 byte 'Logic & If:', 10, 0
-		var_LTRL24 sdword 0
-		var_LTRL25 byte 'Flag is true.', 10, 0
-		var_LTRL26 byte 'x is not equal to y', 10, 0
-		var_LTRL27 byte 'Function & Bool:', 10, 0
-		var_LTRL28 byte 'Check if 4 is even: ', 0
-		var_LTRL29 sdword 4
-		var_LTRL30 byte 'Yes', 10, 0
-		var_LTRL31 byte 'Strings:', 10, 0
-		var_LTRL32 byte 'Hello', 9, 'World', 0
-		var_LTRL33 byte 'String with tab: ', 0
-		var_LTRL34 byte 10, 0
-		var_LTRL35 byte 'Length of string: ', 0
+		var_LTRL21 sdword 1
+		var_LTRL22 byte 'Bitwise NOT (~vbn): ', 0
+		var_LTRL23 byte 10, 0
+		var_LTRL24 byte 'Logic & If:', 10, 0
+		var_LTRL25 sdword 0
+		var_LTRL26 byte 10, 0
+		var_LTRL27 byte 'Flag is true.', 10, 0
+		var_LTRL28 byte 'x is not equal to y', 10, 0
+		var_LTRL29 byte 'Function & Bool:', 10, 0
+		var_LTRL30 byte 'Check if 4 is even: ', 0
+		var_LTRL31 sdword 4
+		var_LTRL32 byte 'Yes', 10, 0
+		var_LTRL33 byte 'Strings:', 10, 0
+		var_LTRL34 byte 'Hello', 9, 'Wd', 0
+		var_LTRL35 byte 'String with tab: ', 0
 		var_LTRL36 byte 10, 0
-		var_LTRL37 byte 'Int to String: ', 0
-		var_LTRL38 sdword 12345
-		var_LTRL39 byte 10, 0
-		var_LTRL40 byte 10, 0
-		var_LTRL41 byte 'Do-While Loop:', 10, 0
-		var_LTRL42 byte 'Iter: ', 0
-		var_LTRL43 byte 10, 0
-		var_LTRL44 sdword 1
+		var_LTRL37 byte 'Length of string: ', 0
+		var_LTRL38 byte 10, 0
+		var_LTRL39 byte 'Int to String: ', 0
+		var_LTRL40 sdword 12345
+		var_LTRL41 byte 10, 0
+		var_LTRL42 byte 10, 0
+		var_LTRL43 byte 'Do-While Loop:', 10, 0
+		var_LTRL44 byte 'Iter: ', 0
 		var_LTRL45 byte 10, 0
-		var_LTRL46 sdword 40
-		var_LTRL47 byte 10, 0
-		var_LTRL48 byte 10, 0
-		var_LTRL49 sdword 250
-		var_LTRL50 byte 'End of Demo', 10, 0
+		var_LTRL46 byte 10, 0
+		var_LTRL47 sdword 10
+		var_LTRL48 sdword 100
+		var_LTRL49 byte 9, 0
+		var_LTRL50 byte 10, 0
+		var_LTRL51 byte 10, 0
+		var_LTRL52 sdword 250
+		var_LTRL53 byte 'End of Demo', 10, 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -270,7 +273,7 @@ call outlich
 push offset var_LTRL20
 call outrad
 
-push var_LTRL5
+push var_LTRL21
 pop eax
 mov byte ptr [var_vbn], al
 
@@ -282,29 +285,40 @@ push eax
 pop eax
 mov byte ptr [var_not_vbn], al
 
-push offset var_LTRL21
+push offset var_LTRL22
 call outrad
 
 movzx eax, byte ptr [var_not_vbn]
 push eax
 call outlich
 
-push offset var_LTRL22
-call outrad
-
 push offset var_LTRL23
 call outrad
 
-push var_LTRL24
+push offset var_LTRL24
+call outrad
+
+push var_LTRL25
+pop eax
+cmp eax, 0
+sete al
+movzx eax, al
+push eax
 pop eax
 mov var_flag, eax
+
+push var_flag
+call outlich
+
+push offset var_LTRL26
+call outrad
 
 push var_flag
 pop eax
 cmp eax, 0
 je lbl_if_end_1
 
-push offset var_LTRL25
+push offset var_LTRL27
 call outrad
 
 lbl_if_end_1:
@@ -321,47 +335,47 @@ pop eax
 cmp eax, 0
 je lbl_if_end_2
 
-push offset var_LTRL26
+push offset var_LTRL28
 call outrad
 
 lbl_if_end_2:
 
-push offset var_LTRL27
+push offset var_LTRL29
 call outrad
 
-push offset var_LTRL28
+push offset var_LTRL30
 call outrad
 
 
-push var_LTRL29
+push var_LTRL31
 call isEven
 push eax
 pop eax
 cmp eax, 0
 je lbl_if_end_3
 
-push offset var_LTRL30
+push offset var_LTRL32
 call outrad
 
 lbl_if_end_3:
 
-push offset var_LTRL31
+push offset var_LTRL33
 call outrad
 
-push offset var_LTRL32
+push offset var_LTRL34
 pop eax
 mov var_s, eax
 
-push offset var_LTRL33
+push offset var_LTRL35
 call outrad
 
 push var_s
 call outrad
 
-push offset var_LTRL34
+push offset var_LTRL36
 call outrad
 
-push offset var_LTRL35
+push offset var_LTRL37
 call outrad
 
 
@@ -371,20 +385,20 @@ call strlen
 push eax
 call outlich
 
-push offset var_LTRL36
+push offset var_LTRL38
 call outrad
 
-push offset var_LTRL37
+push offset var_LTRL39
 call outrad
 
 
-push var_LTRL38
+push var_LTRL40
 push offset buffer
 call tostring
 push eax
 call outrad
 
-push offset var_LTRL39
+push offset var_LTRL41
 call outrad
 
 
@@ -398,10 +412,10 @@ mov var_ss, eax
 push var_ss
 call outrad
 
-push offset var_LTRL40
+push offset var_LTRL42
 call outrad
 
-push offset var_LTRL41
+push offset var_LTRL43
 call outrad
 
 push var_LTRL2
@@ -410,17 +424,17 @@ mov var_x, eax
 
 lbl_do_4:
 
-push offset var_LTRL42
+push offset var_LTRL44
 call outrad
 
 push var_x
 call outlich
 
-push offset var_LTRL43
+push offset var_LTRL45
 call outrad
 
 push var_x
-push var_LTRL44
+push var_LTRL21
 pop ebx
 pop eax
 add eax, ebx
@@ -453,14 +467,14 @@ add eax, ebx
 push eax
 call outlich
 
-push offset var_LTRL45
+push offset var_LTRL46
 call outrad
 
-push var_LTRL4
+push var_LTRL47
 pop eax
 mov byte ptr [var_o], al
 
-push var_LTRL46
+push var_LTRL48
 pop eax
 mov byte ptr [var_b], al
 
@@ -481,11 +495,14 @@ push eax
 pop eax
 mov byte ptr [var_u], al
 
+push offset var_LTRL49
+call outrad
+
 movzx eax, byte ptr [var_u]
 push eax
 call outlich
 
-push offset var_LTRL47
+push offset var_LTRL50
 call outrad
 
 movzx eax, byte ptr [var_o]
@@ -503,14 +520,14 @@ movzx eax, byte ptr [var_bit_or]
 push eax
 call outlich
 
-push offset var_LTRL48
+push offset var_LTRL51
 call outrad
 
-push var_LTRL49
+push var_LTRL52
 pop eax
 mov byte ptr [var_overflow_test], al
 
-push offset var_LTRL50
+push offset var_LTRL53
 call outrad
 
 

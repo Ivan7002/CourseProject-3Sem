@@ -55,7 +55,7 @@ namespace In
 		instream.close(); //   
 		return in;
 	}
-	void addWord(InWord* words, char* word, int line)					//   
+	void addWord(InWord* words, char* word, int line)					//
 	{
 		if (*word == IN_CODE_NULL)
 			return;
@@ -174,6 +174,24 @@ namespace In
 			default:
 				buffer[bufpos++] = text[i];
 				buffer[bufpos] = IN_CODE_NULL;
+
+				// Проверка на слишком длинный buffer (число)
+				if (bufpos > 11) {  // Если buffer содержит более 11 символов
+					buffer[bufpos] = IN_CODE_NULL;
+					// Проверяем, является ли содержимое buffer числом
+					bool isNumeric = true;
+					for (int k = 0; k < bufpos; k++) {
+						if (k == 0 && buffer[k] == '-') continue;
+						if (!isdigit(buffer[k])) {
+							isNumeric = false;
+							break;
+						}
+					}
+					if (isNumeric) {
+						// Слишком длинное число
+						throw ERROR_THROW_IN(313, line, 0);
+					}
+				}
 			}
 		}
 		return words;
@@ -181,7 +199,7 @@ namespace In
 
 	void printTable(InWord* table)								//    
 	{
-		std::cout << " ------------------  : ------------------" << std::endl;
+		std::cout << " ------------------ Word Table ------------------" << std::endl;
 		for (int i = 0; i < table->size; i++)
 			std::cout << std::setw(2) << i << std::setw(3) << table[i].line << " |  " << table[i].word << std::endl;
 	}

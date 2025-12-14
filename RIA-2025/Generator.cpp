@@ -253,7 +253,9 @@ namespace Gener
 
 	void CodeGeneration(Lexer::LEX& tables, Parm::PARM& parm, Log::LOG& log)
 	{
+		std::cout << "Starting code generation..." << std::endl;
 		vector <string> v = startFillVector(tables);
+		std::wcout << L"Output file: " << parm.out << std::endl;
 		ofstream ofile(parm.out);
 		string funcname;
 		int pcount = 0;

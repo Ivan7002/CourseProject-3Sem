@@ -32,13 +32,14 @@ main {
     cout "Bitwise OR (x | y): "; cout x | y; cout "\n";
     cout "Bitwise AND (x & y): "; cout x & y; cout "\n";
     declare unsigned vbn;
-    vbn = 3;
+    vbn = 1;
     not_vbn = ~vbn;
     cout "Bitwise NOT (~vbn): "; cout not_vbn; cout "\n";
 
     cout "Logic & If:\n";
-    flag = false;
-    if (!(flag)) {
+    flag = !(false);
+    cout flag; cout "\n";
+    if (flag) {
         cout "Flag is true.\n";
     }
     if (x != y) {
@@ -56,7 +57,7 @@ main {
 
 
     cout "Strings:\n";
-    s = "Hello\tWorld";
+    s = "Hello\tWd";
     cout "String with tab: "; cout s; cout "\n";
     cout "Length of string: "; cout strlen(s); cout "\n";
     cout "Int to String: "; cout tostring(12345); cout "\n";
@@ -79,10 +80,10 @@ cout 2 + e; cout "\n";
 declare unsigned o;
 declare unsigned b;
 o = 10;
-b = 40;
+b = 100;
 declare unsigned u;
 u = (o + b / 2);
-cout u; cout "\n";   
+cout "\t"; cout u; cout "\n";   
 
 declare unsigned bit_or;
 bit_or = o | b;
@@ -92,6 +93,7 @@ declare unsigned overflow_test;
 overflow_test = 250;  
 
     cout "End of Demo\n";
+  
 
     
     

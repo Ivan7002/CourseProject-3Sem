@@ -5,8 +5,8 @@
   In.cpp
   IT.cpp
   LexAnalysis.cpp
-D:\Course Project 3 Sem\RIA-2025\LexAnalysis.cpp(109,41): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
   Log.cpp
+D:\Course Project 3 Sem\RIA-2025\LexAnalysis.cpp(109,41): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
   LT.cpp
   MFST.cpp
   Parm.cpp

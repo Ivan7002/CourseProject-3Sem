@@ -5,9 +5,9 @@
 
 #define ERROR_THROW(id) Error::GetError(id);				
 #define ERROR_THROW_IN(id, line, cells) Error::GetError(id, line, cells);	
-#define ERROR_ENTRY(id, message) {id, message}	//элемент таблицы ошибок
+#define ERROR_ENTRY(id, message) {id, message}	//macro for error entry
 
-#define ERROR_ENTRY_NODEF(id)		ERROR_ENTRY(-id, "Неопределенная ошибка")
+#define ERROR_ENTRY_NODEF(id)		ERROR_ENTRY(-id, "Undefined error")
 
 #define ERROR_ENTRY_NODEF10(id)		ERROR_ENTRY_NODEF(id + 0), ERROR_ENTRY_NODEF(id + 1), \
 									ERROR_ENTRY_NODEF(id + 2), ERROR_ENTRY_NODEF(id + 3), \
@@ -22,18 +22,18 @@
 
 namespace Error
 {
-	struct ERROR								//тип исключения для throw ERROR_THROW | ERROR_THROW_IN в catch(ERROR)
+	struct ERROR								//struct for throw ERROR_THROW | ERROR_THROW_IN and catch(ERROR)
 	{
 		int id;
 		char message[ERROR_MAXSIZE_MESSAGE];
 
 		struct IN
 		{
-			short line;							//номер строки (0, 1, 2, ...)
-			short col;							//номер позиции в строке(0, 1, 2, ...)
+			short line;							//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (0, 1, 2, ...)
+			short col;							//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(0, 1, 2, ...)
 		} position;
 	};
 
-	ERROR GetError(int id);							//сформировать ERROR для ERROR_THROW
-	ERROR GetError(int id, int line, int cells);	//сформировать ERROR для ERROR_THROW_IN
+	ERROR GetError(int id);							//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ERROR пїЅпїЅпїЅ ERROR_THROW
+	ERROR GetError(int id, int line, int cells);	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ERROR пїЅпїЅпїЅ ERROR_THROW_IN
 }
