@@ -1,4 +1,0 @@
-﻿  StaticLibrary.cpp
-D:\Course Project\StaticLibrary\StaticLibrary.cpp(19,16): warning C4311: приведение типов: усечение указателя из "char *" в "int"
-D:\Course Project\StaticLibrary\StaticLibrary.cpp(19,16): warning C4302: приведение типов: усечение из "char *" к "int"
-  StaticLibrary.vcxproj -> D:\Course Project\RIA-2025\x64\Debug\StaticLibrary.lib

@@ -27,7 +27,7 @@ ExitProcess PROTO:DWORD
 		var_LTRL1 sdword 2
 		var_LTRL2 sdword 0
 		var_LTRL3 byte 'StartDemo', 0
-		var_LTRL4 sdword 500
+		var_LTRL4 sdword 10
 		var_LTRL5 sdword 3
 		var_LTRL6 byte 'x = 10, y = 3', 10, 0
 		var_LTRL7 byte 'x + y = ', 0
@@ -70,13 +70,12 @@ ExitProcess PROTO:DWORD
 		var_LTRL44 byte 'Iter: ', 0
 		var_LTRL45 byte 10, 0
 		var_LTRL46 byte 10, 0
-		var_LTRL47 sdword 10
-		var_LTRL48 sdword 100
-		var_LTRL49 byte 9, 0
+		var_LTRL47 sdword 100
+		var_LTRL48 byte 9, 0
+		var_LTRL49 byte 10, 0
 		var_LTRL50 byte 10, 0
-		var_LTRL51 byte 10, 0
-		var_LTRL52 sdword 250
-		var_LTRL53 byte 'End of Demo', 10, 0
+		var_LTRL51 sdword 250
+		var_LTRL52 byte 'End of Demo', 10, 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -470,11 +469,11 @@ call outlich
 push offset var_LTRL46
 call outrad
 
-push var_LTRL47
+push var_LTRL4
 pop eax
 mov byte ptr [var_o], al
 
-push var_LTRL48
+push var_LTRL47
 pop eax
 mov byte ptr [var_b], al
 
@@ -495,14 +494,14 @@ push eax
 pop eax
 mov byte ptr [var_u], al
 
-push offset var_LTRL49
+push offset var_LTRL48
 call outrad
 
 movzx eax, byte ptr [var_u]
 push eax
 call outlich
 
-push offset var_LTRL50
+push offset var_LTRL49
 call outrad
 
 movzx eax, byte ptr [var_o]
@@ -520,14 +519,14 @@ movzx eax, byte ptr [var_bit_or]
 push eax
 call outlich
 
-push offset var_LTRL51
+push offset var_LTRL50
 call outrad
 
-push var_LTRL52
+push var_LTRL51
 pop eax
 mov byte ptr [var_overflow_test], al
 
-push offset var_LTRL53
+push offset var_LTRL52
 call outrad
 
 

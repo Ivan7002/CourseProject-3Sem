@@ -1,9 +1,0 @@
-function integer badFunction(integer x) {
-    declare integer y;
-    y = x + 1;
-}
-
-main {
-    declare integer result;
-    result = badFunction(5);
-}
