@@ -38,10 +38,10 @@ namespace Log
 		*log.stream << "\n----------- Protocol ------------ Date: " << buffer << " ------------ \n\n";
 	}
 
-	void writeLine(std::ostream* stream, char* c, ...)		// ������� � �������� ������������ �����
+	void writeLine(std::ostream* stream, char* c, ...)		
 	{
-		char** ptr = &c;			// ��������� ��� ������� � ����������
-		char* result;				// ������ ����������
+		char** ptr = &c;			
+		char* result;			
 		result = new char[15];
 		int size = 0;
 
@@ -50,7 +50,7 @@ namespace Log
 			size_t slen = strlen(*ptr);
 			result = (char*)realloc(result, size + slen);
 			result[size] = '\0';
-			size += slen; // size - ������ ������ ������
+			size += slen; 
 			strcat_s(result, size + 1, *ptr);
 			ptr++;
 		}

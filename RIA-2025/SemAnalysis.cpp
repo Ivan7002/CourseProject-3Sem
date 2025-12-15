@@ -197,6 +197,27 @@ namespace Semantic
 					sem_ok = false;
 					Log::writeError(log.stream, Error::GetError(303, tables.lextable.table[i].sn, 0));
 				}
+				else if (i + 2 < tables.lextable.size && tables.lextable.table[i + 2].lexema == LEX_ID)
+				{
+					// Check for variable redeclaration
+					int varIndex = tables.lextable.table[i + 2].idxTI;
+					if (varIndex != NULLIDX_TI && varIndex < tables.idtable.size)
+					{
+						char* varName = tables.idtable.table[varIndex].id;
+						// Check if a variable with this name already exists
+						for (int j = 0; j < tables.idtable.size; j++)
+						{
+							if (j != varIndex && strcmp(tables.idtable.table[j].id, varName) == 0 &&
+								tables.idtable.table[j].idtype == IT::IDTYPE::V)
+							{
+								sem_ok = false;
+								Log::writeError(log.stream, Error::GetError(306, tables.lextable.table[i].sn, 0));
+								break;
+							}
+						}
+					}
+				}
+				break;
 			}
 			case LEX_DIRSLASH:
 			case LEX_PERSENT:
@@ -552,7 +573,15 @@ namespace Semantic
 				}
 				break;
 			}
-			case LEX_MORE:	case LEX_LESS: case LEX_EQUALS:   case LEX_NOTEQUALS:	case LEX_MOREEQUALS:	case LEX_LESSEQUALS:
+			case LEX_MOREEQUALS:
+			case LEX_LESSEQUALS:
+			{
+				// Unsupported operators >= and <=
+				sem_ok = false;
+				Log::writeError(log.stream, Error::GetError(320, tables.lextable.table[i].sn, 0));
+				break;
+			}
+			case LEX_MORE:	case LEX_LESS: case LEX_EQUALS:   case LEX_NOTEQUALS:
 			case LEX_PLUS: case LEX_MINUS: case LEX_STAR:
 			case LEX_BITOR: case LEX_BITAND: case LEX_BITNOT:
 			{

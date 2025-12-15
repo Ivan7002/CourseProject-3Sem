@@ -40,7 +40,7 @@ namespace LT
 	void writeLexTable(std::ostream* stream, LT::LexTable& lextable)
 	{
 		*stream << "------------------------------ Lex Table ------------------------\n" << std::endl;
-		*stream << "|  N | ������� | ������ | ������ � �� |" << std::endl;
+		*stream << "|  N | Lexema | Line | Index in TI |" << std::endl;
 		for (int i = 0; i < lextable.size; i++)
 		{
 			*stream << "|" << std::setw(3) << i << " | " << std::setw(4) << lextable.table[i].lexema << "    |  " << std::setw(3)

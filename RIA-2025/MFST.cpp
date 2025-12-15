@@ -148,8 +148,8 @@ namespace MFST
 		{
 		case LENTA_END:         MFST_TRACE4(log, "------>LENTA_END")
 			* log.stream << "-------------------------------------------------------------------------------------" << std::endl;
-			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d:всего строк %d, синтаксический анализ выполнен без ошибок ", 0, lenta_size);
-			*log.stream << std::setw(4) << std::left << 0 << ":всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок " << std::endl;
+			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: total lines %d, syntax analysis completed without errors ", 0, lenta_size);
+			*log.stream << std::setw(4) << std::left << 0 << ":Total lines " << lenta_size << ", syntax analysis completed without errors " << std::endl;
 			rc = true;
 			break;
 		case NS_NORULE:         MFST_TRACE4(log, "------>NS_NORULE")
@@ -193,7 +193,7 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERROR err = Error::GetError(errid);
-			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "Ошибка %d: строка %d, %s", err.id, lex.lextable.table[lpos].sn, err.message);
+			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "Error %d: line %d, %s", err.id, lex.lextable.table[lpos].sn, err.message);
 			rc = buf;
 		};
 		return rc;

@@ -71,11 +71,10 @@ ExitProcess PROTO:DWORD
 		var_LTRL45 byte 10, 0
 		var_LTRL46 byte 10, 0
 		var_LTRL47 sdword 100
-		var_LTRL48 byte 9, 0
+		var_LTRL48 byte 10, 0
 		var_LTRL49 byte 10, 0
-		var_LTRL50 byte 10, 0
-		var_LTRL51 sdword 250
-		var_LTRL52 byte 'End of Demo', 10, 0
+		var_LTRL50 sdword 250
+		var_LTRL51 byte 'End of Demo', 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -469,6 +468,10 @@ call outlich
 push offset var_LTRL46
 call outrad
 
+push var_LTRL2
+pop eax
+mov byte ptr [var_e], al
+
 push var_LTRL4
 pop eax
 mov byte ptr [var_o], al
@@ -494,14 +497,11 @@ push eax
 pop eax
 mov byte ptr [var_u], al
 
-push offset var_LTRL48
-call outrad
-
 movzx eax, byte ptr [var_u]
 push eax
 call outlich
 
-push offset var_LTRL49
+push offset var_LTRL48
 call outrad
 
 movzx eax, byte ptr [var_o]
@@ -519,14 +519,14 @@ movzx eax, byte ptr [var_bit_or]
 push eax
 call outlich
 
-push offset var_LTRL50
+push offset var_LTRL49
 call outrad
 
-push var_LTRL51
+push var_LTRL50
 pop eax
 mov byte ptr [var_overflow_test], al
 
-push offset var_LTRL52
+push offset var_LTRL51
 call outrad
 
 

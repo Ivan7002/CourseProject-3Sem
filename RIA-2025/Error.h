@@ -29,11 +29,11 @@ namespace Error
 
 		struct IN
 		{
-			short line;							//����� ������ (0, 1, 2, ...)
-			short col;							//����� ������� � ������(0, 1, 2, ...)
+			short line;							
+			short col;						
 		} position;
 	};
 
-	ERROR GetError(int id);							//������������ ERROR ��� ERROR_THROW
-	ERROR GetError(int id, int line, int cells);	//������������ ERROR ��� ERROR_THROW_IN
+	ERROR GetError(int id);							
+	ERROR GetError(int id, int line, int cells);	
 }

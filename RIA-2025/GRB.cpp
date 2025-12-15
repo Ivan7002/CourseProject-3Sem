@@ -198,8 +198,8 @@ namespace GRB
             Rule::Chain(1, TS(LEX_EQUALS)),
             Rule::Chain(1, TS(LEX_NOTEQUALS)),
             Rule::Chain(1, TS(LEX_LESS)),
-            Rule::Chain(1, TS(LEX_MORE)), 
-            Rule::Chain(1, TS(LEX_MOREEQUALS)), 
+            Rule::Chain(1, TS(LEX_MORE)),
+            Rule::Chain(1, TS(LEX_MOREEQUALS)),
             Rule::Chain(1, TS(LEX_LESSEQUALS)) 
         )
 	);

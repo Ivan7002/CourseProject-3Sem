@@ -1,7 +1,7 @@
 function integer sum(integer a, integer b) {
     declare integer res;
     res = a + b;
-    return res;
+  return res;
 }
 
 function bool isEven(integer v) {
@@ -12,6 +12,7 @@ function bool isEven(integer v) {
 
 main {
     declare integer x;
+
     declare integer y;
     declare unsigned varname; 
     declare string s;
@@ -21,6 +22,7 @@ main {
     cout "StartDemo";
 
     x = 10;
+    
     y = 3;
     cout "x = 10, y = 3\n";
     cout "x + y = "; cout sum(x, y); cout "\n";
@@ -55,7 +57,6 @@ main {
 
     declare string text;
 
-
     cout "Strings:\n";
     s = "Hello\tWd";
     cout "String with tab: "; cout s; cout "\n";
@@ -76,14 +77,14 @@ cout ss; cout "\n";
 declare unsigned e;
 e = 0;
 cout 2 + e; cout "\n";
-
+e = 0;
 declare unsigned o;
 declare unsigned b;
 o = 10;
 b = 100;
 declare unsigned u;
 u = (o + b / 2);
-cout "\t"; cout u; cout "\n";   
+cout u; cout "\n";   
 
 declare unsigned bit_or;
 bit_or = o | b;
@@ -92,10 +93,5 @@ cout bit_or; cout "\n";
 declare unsigned overflow_test;
 overflow_test = 250;  
 
-    cout "End of Demo\n";
-  
-
-    
-    
-   
+    cout "End of Demo";
 }

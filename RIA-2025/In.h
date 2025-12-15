@@ -34,22 +34,14 @@ namespace In
 {
 	struct InWord
 	{
-		char word[MAX_LEN_BUFFER];	// �����
-		int line;		// ������ � �������� ������
-		static int size;// ���������� ����
+		char word[MAX_LEN_BUFFER];	
+		int line;		
+		static int size;
 	};
 
 	struct IN
 	{
-		/*
-		S - ( ) [ ] # < > ! & * + - = , ;
-		P - ������, ���������
-		N (NEW)- ����� ������
-		F (FALSE)- �����������
-		T (TRUE)- �����������
-		I (IGNORED)- ������������
-		Q - "
-		*/
+	
 		enum { T = 1024, F = 2048, I = 4096, S, Q, P, N };
 		int code[256] = IN_CODE_TABLE;
 		int size = 0;

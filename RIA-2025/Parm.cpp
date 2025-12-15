@@ -25,7 +25,7 @@ namespace Parm
 		}
 
 		if (*parm.in == NULL)
-			throw ERROR_THROW(100); // �������� ������ ���� �����
+			throw ERROR_THROW(100); 
 
 		if (*parm.out == NULL)
 		{

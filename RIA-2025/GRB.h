@@ -9,10 +9,10 @@ typedef short GRBALPHABET;
 #define ISNS(n) GRB::Rule::Chain::isN(n)
 
 
-#define MFST_TRACE_START(LOG) *log.stream << std::setw( 4)<<std::left<<"Шаг"<<":" \
-	<< std::setw(20) << std::left << "Правило"  \
-	<< std::setw(30) << std::left << "Входная лента" \
-	<< std::setw(20) << std::left << "Стек" \
+#define MFST_TRACE_START(LOG) *log.stream << std::setw( 4)<<std::left<<"Step"<<":" \
+	<< std::setw(20) << std::left << "Rule"  \
+	<< std::setw(30) << std::left << "Input tape" \
+	<< std::setw(20) << std::left << "Stack" \
 	<< std::endl;
 
 #define MFST_TRACE1(LOG) *log.stream <<std::setw( 4)<<std::left<<++FST_TRACE_n<<":" \
